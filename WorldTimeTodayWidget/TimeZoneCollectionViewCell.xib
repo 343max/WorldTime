@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TimeZoneCollectionViewCell" customModule="WorldTimeTodayWidget" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="227" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="227" height="50"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cH9-OV-0B0">
+                        <rect key="frame" x="0.0" y="0.0" width="227" height="50"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="cH9-OV-0B0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Phm-oU-wHF"/>
+                <constraint firstAttribute="bottom" secondItem="cH9-OV-0B0" secondAttribute="bottom" id="aiH-0f-s9K"/>
+                <constraint firstAttribute="trailing" secondItem="cH9-OV-0B0" secondAttribute="trailing" id="o2B-e4-Q4u"/>
+                <constraint firstItem="cH9-OV-0B0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="oiS-AX-qn5"/>
+            </constraints>
+            <size key="customSize" width="227" height="50"/>
+            <connections>
+                <outlet property="timeLabel" destination="cH9-OV-0B0" id="RD6-tH-Vfa"/>
+            </connections>
+            <point key="canvasLocation" x="554.5" y="407"/>
+        </collectionViewCell>
+    </objects>
+</document>
