@@ -11,13 +11,9 @@ import UIKit
 class TimeZoneCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     
-    var timeZone: TimeZone? {
-        didSet(newTimezone) {
-            if let timeZone = newTimezone {
-                timeLabel.text = timeZone.locationName
-            } else {
-                timeLabel.text = nil
-            }
+    var timeZone: TimeZone! {
+        didSet(oldTimezone) {
+            timeLabel.text = timeZone.locationName
         }
     }
 
