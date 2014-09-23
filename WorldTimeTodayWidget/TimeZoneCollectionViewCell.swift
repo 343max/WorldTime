@@ -21,10 +21,13 @@ extension NSAttributedString {
 
 class TimeZoneCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
+    private var timer: NSTimer?
     
     var timeZone: TimeZone! {
         didSet(oldTimezone) {
             updateTime()
+            timer?.invalidate()
+            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateTime", userInfo: nil, repeats: true)
         }
     }
 
@@ -32,8 +35,14 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = UIColor.clearColor()
         super.awakeFromNib()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        timer?.invalidate()
+        timer = nil
+    }
 
-    func updateTime() {
+    @objc func updateTime() {
         timeFormatter.timeZone = timeZone.timeZone
         timeLabel.text = timeFormatter.stringFromDate(NSDate())
         
