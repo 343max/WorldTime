@@ -58,7 +58,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     override func viewDidLayoutSubviews() {
         with(collectionView.collectionViewLayout as UICollectionViewFlowLayout) { layout in
-            layout.itemSize = CGSize(width: self.collectionView.bounds.width / 2.0, height: 50.0)
+            layout.itemSize = CGSize(width: self.collectionView.bounds.width / 2.0, height: self.preferredContentSize.height)
         }
     }
 }
