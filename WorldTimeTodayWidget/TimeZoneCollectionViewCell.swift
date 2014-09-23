@@ -8,18 +8,27 @@
 
 import UIKit
 
+var timeFormatter = with(NSDateFormatter()) { timeFormatter in
+    timeFormatter.dateStyle = .NoStyle
+    timeFormatter.timeStyle = .ShortStyle
+}
+
 class TimeZoneCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     
     var timeZone: TimeZone! {
         didSet(oldTimezone) {
-            timeLabel.text = timeZone.locationName
+            updateTime()
         }
     }
 
     override func awakeFromNib() {
-        self.backgroundColor = UIColor.orangeColor()
+        self.backgroundColor = UIColor.clearColor()
         super.awakeFromNib()
     }
 
+    func updateTime() {
+        timeFormatter.timeZone = timeZone.timeZone
+        timeLabel.text = timeFormatter.stringFromDate(NSDate())
+    }
 }
