@@ -22,7 +22,7 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
     }
 
     override func awakeFromNib() {
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.orangeColor()
         super.awakeFromNib()
     }
 
