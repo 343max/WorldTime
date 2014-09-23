@@ -19,9 +19,6 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5KN-5F-u0i">
                                 <rect key="frame" x="16" y="0.0" width="288" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="FRq-ca-ub2"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZGP-IQ-qd4">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
