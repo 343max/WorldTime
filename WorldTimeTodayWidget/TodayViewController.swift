@@ -29,9 +29,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     var timeZones: [TimeZone]!
     
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
         self.preferredContentSize = CGSize(width: 0, height: 100)
         
         timeZones = [
@@ -43,6 +45,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+
+        super.viewDidLoad()
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
@@ -62,7 +66,8 @@ extension TodayViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TimeZone", forIndexPath: indexPath) as TimeZoneCollectionViewCell
         
-        cell.timeZone = timeZones[indexPath.row]
+        let timeZone = timeZones[indexPath.row]
+        cell.timeZone = timeZone
         
         return cell
     }

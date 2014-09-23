@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5KN-5F-u0i">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5KN-5F-u0i">
+                                <rect key="frame" x="16" y="0.0" width="288" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="FRq-ca-ub2"/>
                                 </constraints>
