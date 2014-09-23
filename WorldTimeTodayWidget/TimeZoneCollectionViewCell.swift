@@ -13,6 +13,12 @@ var timeFormatter = with(NSDateFormatter()) { timeFormatter in
     timeFormatter.timeStyle = .ShortStyle
 }
 
+extension NSAttributedString {
+    func fullRange() -> NSRange {
+        return NSMakeRange(0, self.length)
+    }
+}
+
 class TimeZoneCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     
@@ -30,5 +36,18 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
     func updateTime() {
         timeFormatter.timeZone = timeZone.timeZone
         timeLabel.text = timeFormatter.stringFromDate(NSDate())
+        
+        let timeString = NSMutableAttributedString(string: timeFormatter.stringFromDate(NSDate()))
+        let locationString = NSMutableAttributedString(string: timeZone.locationName)
+        
+        let fontName = "HelveticaNeue-Light"
+        
+        timeString.addAttribute(NSFontAttributeName, value: UIFont(name: fontName, size: 24.0), range: timeString.fullRange())
+        locationString.addAttribute(NSFontAttributeName, value: UIFont(name: fontName, size: 14.0), range: locationString.fullRange())
+        
+        timeString.appendAttributedString(NSAttributedString(string: "\n"))
+        timeString.appendAttributedString(locationString)
+        
+        timeLabel.attributedText = timeString
     }
 }
