@@ -61,6 +61,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             layout.itemSize = CGSize(width: self.collectionView.bounds.width / 2.0, height: self.preferredContentSize.height)
         }
     }
+    
+    func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+        var marginInsets = defaultMarginInsets
+        marginInsets.bottom = 20.0
+        return marginInsets
+    }
 }
 
 extension TodayViewController: UICollectionViewDataSource {
