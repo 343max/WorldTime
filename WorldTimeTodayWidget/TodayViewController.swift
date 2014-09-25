@@ -52,6 +52,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        collectionView.hidden = true
+    }
+    
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
         completionHandler(NCUpdateResult.NewData)
     }
