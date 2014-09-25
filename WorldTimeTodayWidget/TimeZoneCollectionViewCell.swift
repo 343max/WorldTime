@@ -23,8 +23,8 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     private var timer: NSTimer?
     
-    var timeZone: TimeZone! {
-        didSet(oldTimezone) {
+    var location: Location! {
+        didSet(oldLocation) {
             updateTime()
             timer?.invalidate()
             timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateTime", userInfo: nil, repeats: true)
@@ -43,11 +43,11 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
     }
 
     @objc func updateTime() {
-        timeFormatter.timeZone = timeZone.timeZone
+        timeFormatter.timeZone = location.timeZone
         timeLabel.text = timeFormatter.stringFromDate(NSDate())
         
         let timeString = NSMutableAttributedString(string: timeFormatter.stringFromDate(NSDate()))
-        let locationString = NSMutableAttributedString(string: timeZone.locationName)
+        let locationString = NSMutableAttributedString(string: location.name)
         
         let fontName = "HelveticaNeue-Light"
         

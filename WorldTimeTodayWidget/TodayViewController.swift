@@ -9,17 +9,17 @@
 import UIKit
 import NotificationCenter
 
-struct TimeZone {
-    let locationName: String
+struct Location {
+    let name: String
     let timeZone: NSTimeZone
     
-    init(locationName: String, timeZone: NSTimeZone) {
-        self.locationName = locationName
+    init(name: String, timeZone: NSTimeZone) {
+        self.name = name
         self.timeZone = timeZone;
     }
     
-    init(locationName: String, timeZoneAbbrevation: String) {
-        self.locationName = locationName
+    init(name: String, timeZoneAbbrevation: String) {
+        self.name = name
         self.timeZone = NSTimeZone(abbreviation: timeZoneAbbrevation)
     }
 }
@@ -27,7 +27,7 @@ struct TimeZone {
 class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var timeZones: [TimeZone]!
+    var locations: [Location]!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -38,9 +38,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         self.preferredContentSize = CGSize(width: 0, height: 50)
         
-        timeZones = [
-            TimeZone(locationName: "San Francisco", timeZoneAbbrevation: "PST"),
-            TimeZone(locationName: "Berlin", timeZoneAbbrevation: "CET")
+        locations = [
+            Location(name: "San Francisco", timeZoneAbbrevation: "PST"),
+            Location(name: "Berlin", timeZoneAbbrevation: "CET")
         ]
         
         collectionView.registerNib(UINib(nibName: "TimeZoneCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TimeZone")
@@ -80,13 +80,13 @@ extension TodayViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.timeZones.count
+        return locations.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TimeZone", forIndexPath: indexPath) as TimeZoneCollectionViewCell
         
-        cell.timeZone = timeZones[indexPath.row]
+        cell.location = locations[indexPath.row]
         
         return cell
     }
