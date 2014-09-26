@@ -52,6 +52,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.hidden = false
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         collectionView.hidden = true
