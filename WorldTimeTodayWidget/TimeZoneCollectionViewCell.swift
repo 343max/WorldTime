@@ -51,8 +51,8 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
         
         let fontName = "HelveticaNeue-Light"
         
-        timeString.addAttribute(NSFontAttributeName, value: UIFont(name: fontName, size: 24.0), range: timeString.fullRange())
-        locationString.addAttribute(NSFontAttributeName, value: UIFont(name: fontName, size: 14.0), range: locationString.fullRange())
+        timeString.addAttribute(NSFontAttributeName, value: UIFont(name: fontName, size: 24.0)!, range: timeString.fullRange())
+        locationString.addAttribute(NSFontAttributeName, value: UIFont(name: fontName, size: 14.0)!, range: locationString.fullRange())
         
         timeString.appendAttributedString(NSAttributedString(string: "\n"))
         timeString.appendAttributedString(locationString)

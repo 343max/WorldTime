@@ -20,7 +20,7 @@ struct Location {
     
     init(name: String, timeZoneAbbrevation: String) {
         self.name = name
-        self.timeZone = NSTimeZone(abbreviation: timeZoneAbbrevation)
+        self.timeZone = NSTimeZone(abbreviation: timeZoneAbbrevation)!
     }
 }
 
