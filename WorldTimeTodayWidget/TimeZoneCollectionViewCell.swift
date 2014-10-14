@@ -30,6 +30,12 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
             timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateTime", userInfo: nil, repeats: true)
         }
     }
+    
+    var timeHidden: Bool = false {
+        didSet(oldTimeHidden) {
+            updateTime()
+        }
+    }
 
     override func awakeFromNib() {
         self.backgroundColor = UIColor.clearColor()
@@ -44,13 +50,15 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
 
     @objc func updateTime() {
         timeFormatter.timeZone = location.timeZone
-        timeLabel.text = timeFormatter.stringFromDate(NSDate())
         
         let timeString = NSMutableAttributedString(string: timeFormatter.stringFromDate(NSDate()))
         let locationString = NSMutableAttributedString(string: location.name)
         
         let fontName = "HelveticaNeue-Light"
         
+        if (timeHidden) {
+            timeString.addAttribute(NSForegroundColorAttributeName, value: UIColor.clearColor(), range: timeString.fullRange())
+        }
         timeString.addAttribute(NSFontAttributeName, value: UIFont(name: fontName, size: 24.0)!, range: timeString.fullRange())
         locationString.addAttribute(NSFontAttributeName, value: UIFont(name: fontName, size: 14.0)!, range: locationString.fullRange())
         

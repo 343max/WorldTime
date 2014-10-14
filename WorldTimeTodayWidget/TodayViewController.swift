@@ -55,12 +55,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.hidden = false
+        self.timeHidden = false
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        collectionView.hidden = true
+        self.timeHidden = true
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
@@ -78,6 +78,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         marginInsets.bottom = 20.0
         return marginInsets
     }
+
+    var timeHidden: Bool = false {
+        didSet(oldTimeHidden) {
+            self.collectionView.reloadData()
+        }
+    }
 }
 
 extension TodayViewController: UICollectionViewDataSource {
@@ -93,6 +99,7 @@ extension TodayViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TimeZone", forIndexPath: indexPath) as TimeZoneCollectionViewCell
         
         cell.location = locations[indexPath.row]
+        cell.timeHidden = timeHidden
         
         return cell
     }
