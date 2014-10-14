@@ -30,6 +30,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var locations: [Location]!
     
     required init(coder aDecoder: NSCoder) {
+        println("init")
         super.init(coder: aDecoder)
     }
     
