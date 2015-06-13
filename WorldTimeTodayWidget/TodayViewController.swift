@@ -25,14 +25,13 @@ struct Location {
 }
 
 class TodayViewController: UIViewController, NCWidgetProviding {
+    enum CellIdentifier : String {
+        case TimeZone = "TimeZone"
+    }
+
     @IBOutlet weak var collectionView: UICollectionView!
     
     var locations: [Location]!
-    
-    required init(coder aDecoder: NSCoder) {
-        println("init")
-        super.init(coder: aDecoder)
-    }
     
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clearColor()
@@ -44,7 +43,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             Location(name: "Berlin", timeZoneAbbrevation: "CET")
         ]
         
-        collectionView.registerNib(UINib(nibName: "TimeZoneCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TimeZone")
+        collectionView.registerNib(UINib(nibName: "TimeZoneCollectionViewCell", bundle: nil),
+            forCellWithReuseIdentifier: CellIdentifier.TimeZone.rawValue)
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -56,6 +56,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.timeHidden = false
+        print("viewWillAppear")
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -63,7 +64,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.timeHidden = true
     }
     
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         completionHandler(NCUpdateResult.NewData)
     }
     
@@ -96,8 +97,13 @@ extension TodayViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TimeZone", forIndexPath: indexPath) as! TimeZoneCollectionViewCell
-        
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.TimeZone.rawValue,
+            forIndexPath: indexPath) as? TimeZoneCollectionViewCell else
+        {
+            assert(false)
+            return UICollectionViewCell()
+        }
+
         cell.location = locations[indexPath.row]
         cell.timeHidden = timeHidden
         
