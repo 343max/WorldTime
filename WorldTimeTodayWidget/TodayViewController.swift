@@ -68,7 +68,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     override func viewDidLayoutSubviews() {
-        with(collectionView.collectionViewLayout as UICollectionViewFlowLayout) { layout in
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: self.collectionView.bounds.width / 2.0, height: self.preferredContentSize.height)
         }
     }
@@ -96,7 +96,7 @@ extension TodayViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TimeZone", forIndexPath: indexPath) as TimeZoneCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TimeZone", forIndexPath: indexPath) as! TimeZoneCollectionViewCell
         
         cell.location = locations[indexPath.row]
         cell.timeHidden = timeHidden
