@@ -8,11 +8,6 @@
 
 import UIKit
 
-var timeFormatter = with(NSDateFormatter()) { timeFormatter in
-    timeFormatter.dateStyle = .NoStyle
-    timeFormatter.timeStyle = .ShortStyle
-}
-
 extension NSAttributedString {
     func fullRange() -> NSRange {
         return NSMakeRange(0, self.length)
