@@ -96,7 +96,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     var timeHidden: Bool = false {
         didSet(oldTimeHidden) {
-            self.collectionView.reloadData()
+            for cell in self.collectionView.visibleCells() {
+                if let cell = cell as? TimeZoneCollectionViewCell {
+                    cell.timeHidden = timeHidden
+                }
+            }
         }
     }
 }
