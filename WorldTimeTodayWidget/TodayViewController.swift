@@ -63,12 +63,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
         self.timeHidden = false
-        print("viewWillAppear")
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+
         self.timeHidden = true
     }
     
@@ -77,14 +78,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        self.collectionView.frame = self.view.bounds
+
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: self.collectionView.bounds.width / 2.0, height: self.preferredContentSize.height)
+            layout.itemSize = CGSize(width: self.collectionView.bounds.width / CGFloat(self.locations.count),
+                                    height: self.preferredContentSize.height)
         }
     }
-    
+
     func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
         var marginInsets = defaultMarginInsets
-        marginInsets.bottom = 20.0
+        marginInsets.bottom = 10.0
         return marginInsets
     }
 
@@ -115,7 +121,7 @@ extension TodayViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
         cell.location = locations[indexPath.row]
         cell.timeHidden = timeHidden
-        
+
         return cell
     }
 }
