@@ -110,7 +110,3 @@ extension TodayViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
-extension TodayViewController: UICollectionViewDelegate {
-    
-}
