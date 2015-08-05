@@ -24,7 +24,7 @@ struct Location {
     }
 }
 
-class TodayViewController: UIViewController, NCWidgetProviding {
+class TodayViewController: UIViewController, NCWidgetProviding, UICollectionViewDelegate {
     enum CellIdentifier : String {
         case TimeZone = "TimeZone"
     }
