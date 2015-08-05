@@ -24,9 +24,17 @@ struct Location {
     }
 }
 
-class TodayViewController: UIViewController, NCWidgetProviding, UICollectionViewDelegate {
-    enum CellIdentifier : String {
-        case TimeZone = "TimeZone"
+class TodayViewController: UIViewController, NCWidgetProviding {
+    enum Cell : String {
+        case TimeZone = "TimeZoneCollectionViewCell"
+
+        var identifier: String {
+            return self.rawValue
+        }
+
+        var nibName: String {
+            return self.rawValue
+        }
     }
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -42,9 +50,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, UICollectionView
             Location(name: "San Francisco", timeZoneAbbrevation: "PST"),
             Location(name: "Berlin", timeZoneAbbrevation: "CET")
         ]
-        
-        collectionView.registerNib(UINib(nibName: "TimeZoneCollectionViewCell", bundle: nil),
-            forCellWithReuseIdentifier: CellIdentifier.TimeZone.rawValue)
+
+        let nib = UINib(nibName: Cell.TimeZone.nibName, bundle: nil)
+        collectionView.registerNib(nib, forCellWithReuseIdentifier: Cell.TimeZone.identifier)
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -87,7 +95,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, UICollectionView
     }
 }
 
-extension TodayViewController: UICollectionViewDataSource {
+extension TodayViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -97,8 +105,9 @@ extension TodayViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.TimeZone.rawValue,
-            forIndexPath: indexPath) as? TimeZoneCollectionViewCell else
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Cell.TimeZone.identifier,
+            forIndexPath: indexPath)
+            as? TimeZoneCollectionViewCell else
         {
             assert(false)
             return UICollectionViewCell()

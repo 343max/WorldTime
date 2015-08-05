@@ -20,6 +20,11 @@ extension NSAttributedString {
 }
 
 class TimeZoneCollectionViewCell: UICollectionViewCell {
+    static let timeFormatter: NSDateFormatter = with(NSDateFormatter()) { timeFormatter in
+        timeFormatter.dateStyle = .NoStyle
+        timeFormatter.timeStyle = .ShortStyle
+    }
+
     @IBOutlet weak var timeLabel: UILabel!
     private var timer: NSTimer?
     
@@ -49,18 +54,16 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
     }
 
     @objc func updateTime() {
-        timeFormatter.timeZone = location.timeZone
+        TimeZoneCollectionViewCell.timeFormatter.timeZone = location.timeZone
         
-        let timeString = NSMutableAttributedString(string: timeFormatter.stringFromDate(NSDate()))
+        let timeString = NSMutableAttributedString(string: TimeZoneCollectionViewCell.timeFormatter.stringFromDate(NSDate()))
         let locationString = NSMutableAttributedString(string: location.name)
-        
-        let fontName = "HelveticaNeue-Light"
         
         if (timeHidden) {
             timeString.addAttribute(NSForegroundColorAttributeName, value: UIColor.clearColor(), range: timeString.fullRange())
         }
-        timeString.addAttribute(NSFontAttributeName, value: UIFont(name: fontName, size: 24.0)!, range: timeString.fullRange())
-        locationString.addAttribute(NSFontAttributeName, value: UIFont(name: fontName, size: 14.0)!, range: locationString.fullRange())
+        timeString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(24.0), range: timeString.fullRange())
+        locationString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14.0), range: locationString.fullRange())
         
         timeString.appendAttributedString(NSAttributedString(string: "\n"))
         timeString.appendAttributedString(locationString)
