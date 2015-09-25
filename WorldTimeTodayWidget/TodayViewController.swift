@@ -23,26 +23,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    var locations: [Location]!
-    
+
+    var collectionViewSource = LocationsCollectionViewDataSource()
+
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clearColor()
         
         self.preferredContentSize = CGSize(width: 0, height: 50)
 
-        let nib = UINib(nibName: Cell.TimeZone.nibName, bundle: nil)
-        collectionView.registerNib(nib, forCellWithReuseIdentifier: Cell.TimeZone.identifier)
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        collectionViewSource.prepare(collectionView: collectionView)
+
         collectionView.backgroundColor = UIColor.clearColor()
 
         super.viewDidLoad()
     }
     
     override func viewWillAppear(animated: Bool) {
-        locations = Location.fromDefaults()
+        collectionViewSource.locations = Location.fromDefaults()
 
         super.viewWillAppear(animated)
 
@@ -65,7 +62,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.collectionView.frame = self.view.bounds
 
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: self.collectionView.bounds.width / CGFloat(self.locations.count),
+            layout.itemSize = CGSize(width: self.collectionView.bounds.width / CGFloat(collectionViewSource.locations.count),
                                     height: self.preferredContentSize.height)
         }
     }
@@ -84,30 +81,5 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 }
             }
         }
-    }
-}
-
-extension TodayViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return locations.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Cell.TimeZone.identifier,
-            forIndexPath: indexPath)
-            as? TimeZoneCollectionViewCell else
-        {
-            assert(false)
-            return UICollectionViewCell()
-        }
-
-        cell.location = locations[indexPath.row]
-        cell.timeHidden = timeHidden
-
-        return cell
     }
 }

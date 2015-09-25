@@ -22,6 +22,11 @@
 		50F2734219D0FD9F00D4E7D4 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2734119D0FD9F00D4E7D4 /* Helper.swift */; };
 		BBB393241BB4D3B300518D0F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393231BB4D3B300518D0F /* Location.swift */; settings = {ASSET_TAGS = (); }; };
 		BBB393251BB4D3CB00518D0F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393231BB4D3B300518D0F /* Location.swift */; settings = {ASSET_TAGS = (); }; };
+		BBB393271BB4E6A200518D0F /* LocationsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393261BB4E6A200518D0F /* LocationsCollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		BBB393281BB4E6A200518D0F /* LocationsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393261BB4E6A200518D0F /* LocationsCollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		BBB393291BB4E92A00518D0F /* TimeZoneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50006B8A19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		BBB3932A1BB4E93100518D0F /* TimeZoneCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50006B8B19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		BBB3932B1BB4E94200518D0F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2734119D0FD9F00D4E7D4 /* Helper.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,8 +85,9 @@
 		5080795519CEFE6000606C28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5080795619CEFE6000606C28 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		5080795819CEFE6000606C28 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
-		50F2734119D0FD9F00D4E7D4 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		50F2734119D0FD9F00D4E7D4 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = WorldTimeTodayWidget/Helper.swift; sourceTree = SOURCE_ROOT; };
 		BBB393231BB4D3B300518D0F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		BBB393261BB4E6A200518D0F /* LocationsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BBE8CF921B7AF0BF000A7277 /* WorldTimeTodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WorldTimeTodayWidget.entitlements; sourceTree = "<group>"; };
 		BBE8CF931B7AF0DD000A7277 /* WorldTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WorldTime.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +150,8 @@
 				5080793419CEFE4100606C28 /* LaunchScreen.xib */,
 				5080792919CEFE4000606C28 /* Supporting Files */,
 				BBB393231BB4D3B300518D0F /* Location.swift */,
+				BBB393261BB4E6A200518D0F /* LocationsCollectionViewDataSource.swift */,
+				50F2734119D0FD9F00D4E7D4 /* Helper.swift */,
 			);
 			path = WorldTime;
 			sourceTree = "<group>";
@@ -185,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				BBE8CF921B7AF0BF000A7277 /* WorldTimeTodayWidget.entitlements */,
-				50F2734119D0FD9F00D4E7D4 /* Helper.swift */,
 				5080795619CEFE6000606C28 /* TodayViewController.swift */,
 				5080795819CEFE6000606C28 /* MainInterface.storyboard */,
 				5080795419CEFE6000606C28 /* Supporting Files */,
@@ -321,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5080793119CEFE4100606C28 /* Main.storyboard in Resources */,
+				BBB3932A1BB4E93100518D0F /* TimeZoneCollectionViewCell.xib in Resources */,
 				5080793619CEFE4100606C28 /* LaunchScreen.xib in Resources */,
 				5080793319CEFE4100606C28 /* Images.xcassets in Resources */,
 			);
@@ -349,9 +357,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBB393271BB4E6A200518D0F /* LocationsCollectionViewDataSource.swift in Sources */,
 				5080792E19CEFE4100606C28 /* ViewController.swift in Sources */,
+				BBB393291BB4E92A00518D0F /* TimeZoneCollectionViewCell.swift in Sources */,
 				BBB393241BB4D3B300518D0F /* Location.swift in Sources */,
 				5080792C19CEFE4000606C28 /* AppDelegate.swift in Sources */,
+				BBB3932B1BB4E94200518D0F /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +380,7 @@
 			files = (
 				50006B8C19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.swift in Sources */,
 				5080795719CEFE6000606C28 /* TodayViewController.swift in Sources */,
+				BBB393281BB4E6A200518D0F /* LocationsCollectionViewDataSource.swift in Sources */,
 				BBB393251BB4D3CB00518D0F /* Location.swift in Sources */,
 				50F2734219D0FD9F00D4E7D4 /* Helper.swift in Sources */,
 			);
