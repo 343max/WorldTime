@@ -10,18 +10,6 @@ import UIKit
 import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
-    enum Cell : String {
-        case TimeZone = "TimeZoneCollectionViewCell"
-
-        var identifier: String {
-            return self.rawValue
-        }
-
-        var nibName: String {
-            return self.rawValue
-        }
-    }
-
     @IBOutlet weak var collectionView: UICollectionView!
 
     var collectionViewSource = LocationsCollectionViewDataSource()
@@ -29,7 +17,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clearColor()
         
-        self.preferredContentSize = CGSize(width: 0, height: 50)
+        self.preferredContentSize = CGSize(width: 0, height: TimeZoneCollectionViewCell.preferedHeight)
 
         collectionViewSource.prepare(collectionView: collectionView)
 
@@ -39,10 +27,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     override func viewWillAppear(animated: Bool) {
-        collectionViewSource.locations = Location.fromDefaults()
-
         super.viewWillAppear(animated)
 
+        collectionViewSource.locations = Location.fromDefaults()
+        collectionViewSource.updateItemSize(collectionView: collectionView)
+        collectionView.reloadData()
         self.timeHidden = false
     }
     
@@ -60,11 +49,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLayoutSubviews()
 
         self.collectionView.frame = self.view.bounds
-
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: self.collectionView.bounds.width / CGFloat(collectionViewSource.locations.count),
-                                    height: self.preferredContentSize.height)
-        }
+        collectionViewSource.updateItemSize(collectionView: collectionView)
     }
 
     func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
@@ -75,11 +60,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     var timeHidden: Bool = false {
         didSet(oldTimeHidden) {
-            for cell in self.collectionView.visibleCells() {
-                if let cell = cell as? TimeZoneCollectionViewCell {
-                    cell.timeHidden = timeHidden
-                }
-            }
+            collectionViewSource.timeHidden = timeHidden
+            collectionView.reloadData()
         }
     }
 }

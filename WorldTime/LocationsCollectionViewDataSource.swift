@@ -21,6 +21,14 @@ class LocationsCollectionViewDataSource: NSObject, UICollectionViewDataSource, U
         collectionView.delegate = self
     }
 
+    func updateItemSize(collectionView collectionView: UICollectionView) {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = TimeZoneCollectionViewCell.preferredItemSize(collectionViewWidth: collectionView.bounds.width, itemCount: locations.count)
+        } else {
+            assert(false, "this needs to be an collectionViewFlowLayout")
+        }
+    }
+
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }

@@ -15,9 +15,15 @@ extension NSAttributedString {
 }
 
 class TimeZoneCollectionViewCell: UICollectionViewCell {
+    static let preferedHeight: CGFloat = 50.0
     static let timeFormatter: NSDateFormatter = with(NSDateFormatter()) { timeFormatter in
         timeFormatter.dateStyle = .NoStyle
         timeFormatter.timeStyle = .ShortStyle
+    }
+
+    static func preferredItemSize(collectionViewWidth viewWidth: CGFloat, itemCount: Int) -> CGSize {
+        return CGSize(width: viewWidth / CGFloat(itemCount),
+                      height: TimeZoneCollectionViewCell.preferedHeight)
     }
 
     @IBOutlet weak var timeLabel: UILabel!
