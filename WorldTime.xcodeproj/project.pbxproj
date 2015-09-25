@@ -10,8 +10,7 @@
 		50006B8C19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50006B8A19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.swift */; };
 		50006B8D19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50006B8B19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.xib */; };
 		5080792C19CEFE4000606C28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5080792B19CEFE4000606C28 /* AppDelegate.swift */; };
-		5080792E19CEFE4100606C28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5080792D19CEFE4100606C28 /* ViewController.swift */; };
-		5080793119CEFE4100606C28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5080792F19CEFE4100606C28 /* Main.storyboard */; };
+		5080792E19CEFE4100606C28 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5080792D19CEFE4100606C28 /* SetupViewController.swift */; };
 		5080793319CEFE4100606C28 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5080793219CEFE4100606C28 /* Images.xcassets */; };
 		5080793619CEFE4100606C28 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5080793419CEFE4100606C28 /* LaunchScreen.xib */; };
 		5080794219CEFE4100606C28 /* WorldTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5080794119CEFE4100606C28 /* WorldTimeTests.swift */; };
@@ -73,8 +72,7 @@
 		5080792619CEFE4000606C28 /* WorldTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5080792A19CEFE4000606C28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5080792B19CEFE4000606C28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5080792D19CEFE4100606C28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5080793019CEFE4100606C28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5080792D19CEFE4100606C28 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		5080793219CEFE4100606C28 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5080793519CEFE4100606C28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5080793B19CEFE4100606C28 /* WorldTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,8 +142,7 @@
 			children = (
 				BBE8CF931B7AF0DD000A7277 /* WorldTime.entitlements */,
 				5080792B19CEFE4000606C28 /* AppDelegate.swift */,
-				5080792D19CEFE4100606C28 /* ViewController.swift */,
-				5080792F19CEFE4100606C28 /* Main.storyboard */,
+				5080792D19CEFE4100606C28 /* SetupViewController.swift */,
 				5080793219CEFE4100606C28 /* Images.xcassets */,
 				5080793419CEFE4100606C28 /* LaunchScreen.xib */,
 				5080792919CEFE4000606C28 /* Supporting Files */,
@@ -327,7 +324,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5080793119CEFE4100606C28 /* Main.storyboard in Resources */,
 				BBB3932A1BB4E93100518D0F /* TimeZoneCollectionViewCell.xib in Resources */,
 				5080793619CEFE4100606C28 /* LaunchScreen.xib in Resources */,
 				5080793319CEFE4100606C28 /* Images.xcassets in Resources */,
@@ -358,7 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBB393271BB4E6A200518D0F /* LocationsCollectionViewDataSource.swift in Sources */,
-				5080792E19CEFE4100606C28 /* ViewController.swift in Sources */,
+				5080792E19CEFE4100606C28 /* SetupViewController.swift in Sources */,
 				BBB393291BB4E92A00518D0F /* TimeZoneCollectionViewCell.swift in Sources */,
 				BBB393241BB4D3B300518D0F /* Location.swift in Sources */,
 				5080792C19CEFE4000606C28 /* AppDelegate.swift in Sources */,
@@ -407,14 +403,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5080792F19CEFE4100606C28 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5080793019CEFE4100606C28 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5080793419CEFE4100606C28 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

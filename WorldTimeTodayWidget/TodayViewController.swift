@@ -19,7 +19,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         self.preferredContentSize = CGSize(width: 0, height: TimeZoneCollectionViewCell.preferedHeight)
 
-        collectionViewSource.prepare(collectionView: collectionView)
+        collectionViewSource.collectionView = collectionView
 
         collectionView.backgroundColor = UIColor.clearColor()
 
@@ -30,8 +30,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewWillAppear(animated)
 
         collectionViewSource.locations = Location.fromDefaults()
-        collectionViewSource.updateItemSize(collectionView: collectionView)
-        collectionView.reloadData()
         self.timeHidden = false
     }
     
@@ -49,7 +47,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLayoutSubviews()
 
         self.collectionView.frame = self.view.bounds
-        collectionViewSource.updateItemSize(collectionView: collectionView)
+        collectionViewSource.updateItemSize()
     }
 
     func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {

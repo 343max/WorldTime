@@ -11,17 +11,35 @@ import UIKit
 class LocationsCollectionViewDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     static let reuseIdentifier = "TimeZoneCollectionViewCell"
 
-    var locations: [Location] = []
+    var locations: [Location] = [] {
+        didSet {
+            updateItemSize()
+            collectionView?.reloadData()
+        }
+    }
     var timeHidden = false
+    weak var collectionView: UICollectionView? {
+        didSet {
+            if let collectionView = collectionView {
+                prepare(collectionView: collectionView)
+            }
+        }
+    }
 
-    func prepare(collectionView collectionView: UICollectionView) {
+    private func prepare(collectionView collectionView: UICollectionView) {
         let nib = UINib(nibName: LocationsCollectionViewDataSource.reuseIdentifier, bundle: nil)
         collectionView.registerNib(nib, forCellWithReuseIdentifier: LocationsCollectionViewDataSource.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
 
-    func updateItemSize(collectionView collectionView: UICollectionView) {
+    func updateItemSize() {
+        if let collectionView = collectionView {
+            updateItemSize(collectionView: collectionView)
+        }
+    }
+
+    private func updateItemSize(collectionView collectionView: UICollectionView) {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = TimeZoneCollectionViewCell.preferredItemSize(collectionViewWidth: collectionView.bounds.width, itemCount: locations.count)
         } else {
