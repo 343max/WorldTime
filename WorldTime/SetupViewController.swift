@@ -8,17 +8,39 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SetupViewController: UIViewController {
     let collectionViewSource = LocationsCollectionViewDataSource()
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    weak var collectionView: UICollectionView!
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.title = "World Time"
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.removeFromSuperview()
+        view.backgroundColor = UIColor.whiteColor()
+
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0.0
+        layout.minimumLineSpacing = 0.0
+
+        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        self.collectionView = collectionView
+        collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        view.addSubview(collectionView)
 
         collectionViewSource.collectionView = collectionView
+        collectionViewSource.textColor = UIColor.blackColor()
+
+        collectionView.frame = self.view.bounds
+        collectionView.backgroundColor = UIColor.clearColor()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -26,10 +48,12 @@ class ViewController: UIViewController {
 
         collectionViewSource.locations = Location.fromDefaults()
         collectionViewSource.updateItemSize()
+    }
 
-        collectionView.backgroundColor = UIColor.orangeColor()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 
-        collectionView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+        collectionViewSource.updateItemSize()
     }
 }
 

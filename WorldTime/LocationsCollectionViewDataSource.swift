@@ -11,13 +11,27 @@ import UIKit
 class LocationsCollectionViewDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     static let reuseIdentifier = "TimeZoneCollectionViewCell"
 
+    var timeHidden = false {
+        didSet {
+            applyAllCells { (cell) -> () in
+                cell.timeHidden = self.timeHidden
+            }
+        }
+    }
+    var textColor = UIColor.whiteColor() {
+        didSet {
+            applyAllCells { (cell) -> () in
+                cell.textColor = self.textColor
+            }
+        }
+    }
+
     var locations: [Location] = [] {
         didSet {
             updateItemSize()
             collectionView?.reloadData()
         }
     }
-    var timeHidden = false
     weak var collectionView: UICollectionView? {
         didSet {
             if let collectionView = collectionView {
@@ -31,6 +45,14 @@ class LocationsCollectionViewDataSource: NSObject, UICollectionViewDataSource, U
         collectionView.registerNib(nib, forCellWithReuseIdentifier: LocationsCollectionViewDataSource.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
+    }
+
+    private func applyAllCells(callback: (cell: TimeZoneCollectionViewCell) -> ()) {
+        if let collectionView = self.collectionView {
+            for cell in collectionView.visibleCells() as! [TimeZoneCollectionViewCell] {
+                callback(cell: cell)
+            }
+        }
     }
 
     func updateItemSize() {
@@ -66,6 +88,7 @@ class LocationsCollectionViewDataSource: NSObject, UICollectionViewDataSource, U
 
         cell.location = locations[indexPath.row]
         cell.timeHidden = timeHidden
+        cell.textColor = textColor
 
         return cell
     }
