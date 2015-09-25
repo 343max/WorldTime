@@ -9,21 +9,6 @@
 import UIKit
 import NotificationCenter
 
-struct Location {
-    let name: String
-    let timeZone: NSTimeZone
-    
-    init(name: String, timeZone: NSTimeZone) {
-        self.name = name
-        self.timeZone = timeZone;
-    }
-    
-    init(name: String, timeZoneAbbrevation: String) {
-        self.name = name
-        self.timeZone = NSTimeZone(abbreviation: timeZoneAbbrevation)!
-    }
-}
-
 class TodayViewController: UIViewController, NCWidgetProviding {
     enum Cell : String {
         case TimeZone = "TimeZoneCollectionViewCell"
@@ -45,11 +30,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.view.backgroundColor = UIColor.clearColor()
         
         self.preferredContentSize = CGSize(width: 0, height: 50)
-        
-        locations = [
-            Location(name: "San Francisco", timeZoneAbbrevation: "PST"),
-            Location(name: "Berlin", timeZoneAbbrevation: "CET")
-        ]
 
         let nib = UINib(nibName: Cell.TimeZone.nibName, bundle: nil)
         collectionView.registerNib(nib, forCellWithReuseIdentifier: Cell.TimeZone.identifier)
@@ -62,6 +42,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     override func viewWillAppear(animated: Bool) {
+        locations = Location.fromDefaults()
+
         super.viewWillAppear(animated)
 
         self.timeHidden = false
