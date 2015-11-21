@@ -8,14 +8,16 @@
 
 import UIKit
 
-class SetupViewController: UIViewController {
-    let dataSource = LocationsTableViewDataSource()
+class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
+    let dataSource = LocationsEditorDataSource()
 
     weak var tableView: UITableView!
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         title = NSLocalizedString("World Time", comment: "nav bar title")
+
+        dataSource.delegate = self
 
         navigationItem.leftBarButtonItem = editButtonItem()
     }
@@ -47,6 +49,10 @@ class SetupViewController: UIViewController {
         super.viewWillAppear(animated)
 
         dataSource.locations = Location.fromDefaults()
+    }
+
+    func didChangeLocations(locations: [Location]) {
+        print("changed locations: \(locations)")
     }
 }
 

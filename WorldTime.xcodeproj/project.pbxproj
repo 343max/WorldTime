@@ -28,7 +28,7 @@
 		BBB3932B1BB4E94200518D0F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2734119D0FD9F00D4E7D4 /* Helper.swift */; };
 		BBD173391C00371A0025B32F /* LocationsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */; };
 		BBD1733C1C0039B30025B32F /* WorldTimeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1733A1C00390A0025B32F /* WorldTimeLayout.swift */; };
-		BBD1733E1C003DC20025B32F /* LocationsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1733D1C003DC20025B32F /* LocationsTableViewDataSource.swift */; };
+		BBD1733E1C003DC20025B32F /* LocationsEditorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1733D1C003DC20025B32F /* LocationsEditorDataSource.swift */; };
 		BBD173411C0041620025B32F /* NSDateFormaetter+ShortTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD173401C0041620025B32F /* NSDateFormaetter+ShortTime.swift */; };
 		BBD173421C0041D20025B32F /* NSDateFormaetter+ShortTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD173401C0041620025B32F /* NSDateFormaetter+ShortTime.swift */; };
 /* End PBXBuildFile section */
@@ -93,7 +93,7 @@
 		BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsDataSource.swift; sourceTree = "<group>"; };
 		BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BBD1733A1C00390A0025B32F /* WorldTimeLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldTimeLayout.swift; sourceTree = "<group>"; };
-		BBD1733D1C003DC20025B32F /* LocationsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsTableViewDataSource.swift; sourceTree = "<group>"; };
+		BBD1733D1C003DC20025B32F /* LocationsEditorDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsEditorDataSource.swift; sourceTree = "<group>"; };
 		BBD173401C0041620025B32F /* NSDateFormaetter+ShortTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDateFormaetter+ShortTime.swift"; sourceTree = "<group>"; };
 		BBE8CF921B7AF0BF000A7277 /* WorldTimeTodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WorldTimeTodayWidget.entitlements; sourceTree = "<group>"; };
 		BBE8CF931B7AF0DD000A7277 /* WorldTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WorldTime.entitlements; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 			children = (
 				BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */,
 				BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */,
-				BBD1733D1C003DC20025B32F /* LocationsTableViewDataSource.swift */,
+				BBD1733D1C003DC20025B32F /* LocationsEditorDataSource.swift */,
 			);
 			name = LocationsDataSource;
 			sourceTree = "<group>";
@@ -380,7 +380,7 @@
 				BBB393291BB4E92A00518D0F /* TimeZoneCollectionViewCell.swift in Sources */,
 				BBB393241BB4D3B300518D0F /* Location.swift in Sources */,
 				5080792C19CEFE4000606C28 /* AppDelegate.swift in Sources */,
-				BBD1733E1C003DC20025B32F /* LocationsTableViewDataSource.swift in Sources */,
+				BBD1733E1C003DC20025B32F /* LocationsEditorDataSource.swift in Sources */,
 				BBB3932B1BB4E94200518D0F /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
