@@ -34,10 +34,7 @@ class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
 
     @objc func addLocation(sender: AnyObject?) {
         let location = Location(name: "New York", timeZoneAbbrevation: "EST")
-        let indexPath = NSIndexPath(forRow: dataSource.locations.count, inSection: 0)
-        dataSource.locations.append(location)
-        tableView.insertRowsAtIndexPaths([ indexPath ], withRowAnimation: .Automatic)
-        didChangeLocations(dataSource.locations)
+        dataSource.addLocation(location, tableView: tableView)
     }
 
     override func viewDidLoad() {
@@ -62,6 +59,7 @@ class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
 
     func didChangeLocations(locations: [Location]) {
         print("changed locations: \(locations)")
+        Location.toDefaults(locations)
     }
 }
 

@@ -18,7 +18,16 @@ struct Location {
     }
 
     init(name: String, timeZoneAbbrevation: String) {
-        let timeZone = NSTimeZone(abbreviation: timeZoneAbbrevation)!
+        guard let timeZone = NSTimeZone(abbreviation: timeZoneAbbrevation) else {
+            fatalError("couldn't create timeZone: \(timeZoneAbbrevation)")
+        }
+        self.init(name: name, timeZone: timeZone)
+    }
+
+    init(name: String, timeZoneName: String) {
+        guard let timeZone = NSTimeZone(name: timeZoneName) else {
+            fatalError("couldn't create timeZone: \(timeZoneName)")
+        }
         self.init(name: name, timeZone: timeZone)
     }
 }
@@ -26,21 +35,21 @@ struct Location {
 extension Location {
     typealias Dictionary = [String: AnyObject]
     static var nameKey = "Name"
-    static var timeZoneAbbrevationKey = "TimeZoneAbbrevation"
+    static var timeZoneNameKey = "TimeZoneName"
 
     init?(dictionary: Location.Dictionary) {
         guard let name = dictionary[Location.nameKey] as? String,
-              let timeZoneAbbrevation = dictionary[Location.timeZoneAbbrevationKey] as? String else {
+              let timeZoneName = dictionary[Location.timeZoneNameKey] as? String else {
             return nil
         }
-        self.init(name: name, timeZoneAbbrevation: timeZoneAbbrevation)
+        self.init(name: name, timeZoneName: timeZoneName)
     }
 
     var dictionary: Location.Dictionary {
         get {
             return [
                 Location.nameKey: self.name,
-                Location.timeZoneAbbrevationKey: self.timeZone.abbreviation!
+                Location.timeZoneNameKey: self.timeZone.name
             ]
         }
     }
@@ -72,7 +81,7 @@ extension Location {
     static func defaultLocations() -> [Location] {
         return [
             Location(name: "San Francisco", timeZoneAbbrevation: "PST"),
-            Location(name: "Berlin", timeZoneAbbrevation: "CET")
+            Location(name: "Berlin", timeZoneAbbrevation: "CEST")
         ]
     }
 
@@ -82,5 +91,10 @@ extension Location {
         }
 
         return self.from(arrayOfDicts: locations)
+    }
+
+    static func toDefaults(locations: [Location]) {
+        self.userDefaults.setValue(self.arrayOfDicts(locations), forKey: self.locationsKey)
+        self.userDefaults.synchronize()
     }
 }

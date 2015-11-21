@@ -21,6 +21,13 @@ class LocationsEditorDataSource: LocationsDataSource, UITableViewDataSource, UIT
 
     weak var delegate: LocationsEditorDataSourceDelegate?
 
+    func addLocation(location: Location, tableView: UITableView) {
+        let indexPath = NSIndexPath(forRow: locations.count, inSection: 0)
+        locations.append(location)
+        tableView.insertRowsAtIndexPaths([ indexPath ], withRowAnimation: .Automatic)
+        self.delegate?.didChangeLocations(locations)
+    }
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
