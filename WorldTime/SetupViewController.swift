@@ -20,6 +20,7 @@ class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
         dataSource.delegate = self
 
         navigationItem.leftBarButtonItem = editButtonItem()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addLocation:")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -29,6 +30,14 @@ class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
+    }
+
+    @objc func addLocation(sender: AnyObject?) {
+        let location = Location(name: "New York", timeZoneAbbrevation: "EST")
+        let indexPath = NSIndexPath(forRow: dataSource.locations.count, inSection: 0)
+        dataSource.locations.append(location)
+        tableView.insertRowsAtIndexPaths([ indexPath ], withRowAnimation: .Automatic)
+        didChangeLocations(dataSource.locations)
     }
 
     override func viewDidLoad() {
