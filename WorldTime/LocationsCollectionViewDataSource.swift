@@ -9,10 +9,12 @@
 import UIKit
 
 class LocationsCollectionViewDataSource: LocationsDataSource, UICollectionViewDataSource, UICollectionViewDelegate {
+    let reuseIdentifier = "TimeZoneCollectionViewCell"
+    var timeHidden = false
 
     func prepare(collectionView collectionView: UICollectionView) {
-        let nib = UINib(nibName: LocationsDataSource.reuseIdentifier, bundle: nil)
-        collectionView.registerNib(nib, forCellWithReuseIdentifier: LocationsDataSource.reuseIdentifier)
+        let nib = UINib(nibName: self.reuseIdentifier, bundle: nil)
+        collectionView.registerNib(nib, forCellWithReuseIdentifier: self.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -34,8 +36,7 @@ class LocationsCollectionViewDataSource: LocationsDataSource, UICollectionViewDa
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(LocationsDataSource.reuseIdentifier,
-            forIndexPath: indexPath)
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath)
             as? TimeZoneCollectionViewCell else
         {
             assert(false)
@@ -44,7 +45,6 @@ class LocationsCollectionViewDataSource: LocationsDataSource, UICollectionViewDa
 
         cell.location = locations[indexPath.row]
         cell.timeHidden = timeHidden
-        cell.textColor = textColor
         
         return cell
     }

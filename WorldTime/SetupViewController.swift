@@ -37,7 +37,6 @@ class SetupViewController: UIViewController {
         view.addSubview(collectionView)
 
         collectionViewSource.prepare(collectionView: collectionView)
-        collectionViewSource.textColor = UIColor.blackColor()
 
         collectionView.frame = self.view.bounds
         collectionView.backgroundColor = UIColor.clearColor()

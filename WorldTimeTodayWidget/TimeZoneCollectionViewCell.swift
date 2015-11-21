@@ -43,12 +43,6 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    var textColor: UIColor = UIColor.whiteColor() {
-        didSet {
-            timeLabel.textColor = textColor
-        }
-    }
-
     override func awakeFromNib() {
         self.backgroundColor = UIColor.clearColor()
         super.awakeFromNib()

@@ -9,9 +9,7 @@
 import UIKit
 
 class LocationsDataSource: NSObject {
-    static let reuseIdentifier = "TimeZoneCollectionViewCell"
 
-    var timeHidden = false
-    var textColor = UIColor.whiteColor()
     var locations: [Location] = []
+    
 }
