@@ -15,6 +15,11 @@ class WorldTimeLayout: UICollectionViewLayout {
     var itemCount = 0
     var rows = 0
 
+    func prepareLayout(itemCount: Int) {
+        self.itemCount = itemCount
+        rows = Int(ceil(Float(itemCount) / Float(columns)))
+    }
+
     override func prepareLayout() {
         super.prepareLayout()
 
@@ -25,8 +30,7 @@ class WorldTimeLayout: UICollectionViewLayout {
         }
 
         assert(dataSource.numberOfSectionsInCollectionView?(collectionView) == 1)
-        itemCount = dataSource.collectionView(collectionView, numberOfItemsInSection: 0)
-        rows = Int(ceil(Float(itemCount) / Float(columns)))
+        self.prepareLayout(dataSource.collectionView(collectionView, numberOfItemsInSection: 0))
     }
 
     override func collectionViewContentSize() -> CGSize {

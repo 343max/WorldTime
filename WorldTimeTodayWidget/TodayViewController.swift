@@ -16,11 +16,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clearColor()
-        
-        self.preferredContentSize = CGSize(width: 0, height: TimeZoneCollectionViewCell.preferedHeight)
 
         collectionView.backgroundColor = UIColor.clearColor()
         collectionViewSource.prepare(collectionView: collectionView)
+
+        setup()
 
         super.viewDidLoad()
     }
@@ -28,7 +28,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        collectionViewSource.locations = Location.fromDefaults()
+        setup()
+
         self.timeHidden = false
     }
     
@@ -36,6 +37,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewWillDisappear(animated)
 
         self.timeHidden = true
+    }
+
+    func setup() {
+        collectionViewSource.locations = Location.fromDefaults()
+        collectionView.reloadData()
+
+        guard let layout = collectionView.collectionViewLayout as? WorldTimeLayout else {
+            fatalError("not a WorldTimeLayout")
+        }
+
+        layout.prepareLayout(collectionViewSource.locations.count)
+        self.preferredContentSize = layout.collectionViewContentSize()
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {

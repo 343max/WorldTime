@@ -21,10 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = UINavigationController(rootViewController: SetupViewController())
         window.makeKeyAndVisible()
 
-        let timeZone = NSTimeZone(abbreviation: "CET")!
-        print("abbreviation: \(timeZone.name)")
-        print("abbreviationForDate: \(timeZone.abbreviationForDate(NSDate().dateByAddingTimeInterval(3600 * 24 * 150))!)")
-
         return true
     }
 }
