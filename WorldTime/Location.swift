@@ -76,7 +76,7 @@ extension Location {
 
 extension Location {
     static var locationsKey = "Locations"
-    static var userDefaults = NSUserDefaults.standardUserDefaults()
+    static var userDefaults = NSUserDefaults(suiteName: "group.de.343max.WorldTime")!
 
     static func defaultLocations() -> [Location] {
         return [
