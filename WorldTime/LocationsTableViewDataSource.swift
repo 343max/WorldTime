@@ -35,4 +35,12 @@ class LocationsTableViewDataSource: LocationsDataSource, UITableViewDataSource, 
 
         return cell
     }
+
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
 }

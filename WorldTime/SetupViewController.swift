@@ -15,11 +15,18 @@ class SetupViewController: UIViewController {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.title = "World Time"
+        title = NSLocalizedString("World Time", comment: "nav bar title")
+
+        navigationItem.leftBarButtonItem = editButtonItem()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
     }
 
     override func viewDidLoad() {
