@@ -9,7 +9,7 @@
 import UIKit
 
 class SetupViewController: UIViewController {
-    let collectionViewSource = LocationsDataSource()
+    let collectionViewSource = LocationsCollectionViewDataSource()
 
     weak var collectionView: UICollectionView!
 

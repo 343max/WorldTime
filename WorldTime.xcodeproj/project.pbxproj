@@ -26,8 +26,8 @@
 		BBB393291BB4E92A00518D0F /* TimeZoneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50006B8A19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.swift */; };
 		BBB3932A1BB4E93100518D0F /* TimeZoneCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50006B8B19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.xib */; };
 		BBB3932B1BB4E94200518D0F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2734119D0FD9F00D4E7D4 /* Helper.swift */; };
-		BBD173381C00353D0025B32F /* LocationsDataSource+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD173371C00353D0025B32F /* LocationsDataSource+CollectionView.swift */; };
-		BBD173391C00371A0025B32F /* LocationsDataSource+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD173371C00353D0025B32F /* LocationsDataSource+CollectionView.swift */; };
+		BBD173381C00353D0025B32F /* LocationsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */; };
+		BBD173391C00371A0025B32F /* LocationsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +88,7 @@
 		50F2734119D0FD9F00D4E7D4 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = WorldTimeTodayWidget/Helper.swift; sourceTree = SOURCE_ROOT; };
 		BBB393231BB4D3B300518D0F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsDataSource.swift; sourceTree = "<group>"; };
-		BBD173371C00353D0025B32F /* LocationsDataSource+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocationsDataSource+CollectionView.swift"; sourceTree = "<group>"; };
+		BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BBE8CF921B7AF0BF000A7277 /* WorldTimeTodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WorldTimeTodayWidget.entitlements; sourceTree = "<group>"; };
 		BBE8CF931B7AF0DD000A7277 /* WorldTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WorldTime.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,7 +152,7 @@
 				BBB393231BB4D3B300518D0F /* Location.swift */,
 				BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */,
 				50F2734119D0FD9F00D4E7D4 /* Helper.swift */,
-				BBD173371C00353D0025B32F /* LocationsDataSource+CollectionView.swift */,
+				BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */,
 			);
 			path = WorldTime;
 			sourceTree = "<group>";
@@ -361,7 +361,7 @@
 				5080792E19CEFE4100606C28 /* SetupViewController.swift in Sources */,
 				BBB393291BB4E92A00518D0F /* TimeZoneCollectionViewCell.swift in Sources */,
 				BBB393241BB4D3B300518D0F /* Location.swift in Sources */,
-				BBD173381C00353D0025B32F /* LocationsDataSource+CollectionView.swift in Sources */,
+				BBD173381C00353D0025B32F /* LocationsCollectionViewDataSource.swift in Sources */,
 				5080792C19CEFE4000606C28 /* AppDelegate.swift in Sources */,
 				BBB3932B1BB4E94200518D0F /* Helper.swift in Sources */,
 			);
@@ -381,7 +381,7 @@
 			files = (
 				50006B8C19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.swift in Sources */,
 				5080795719CEFE6000606C28 /* TodayViewController.swift in Sources */,
-				BBD173391C00371A0025B32F /* LocationsDataSource+CollectionView.swift in Sources */,
+				BBD173391C00371A0025B32F /* LocationsCollectionViewDataSource.swift in Sources */,
 				BBB393281BB4E6A200518D0F /* LocationsDataSource.swift in Sources */,
 				BBB393251BB4D3CB00518D0F /* Location.swift in Sources */,
 				50F2734219D0FD9F00D4E7D4 /* Helper.swift in Sources */,

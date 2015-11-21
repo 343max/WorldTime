@@ -12,7 +12,7 @@ import NotificationCenter
 class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var collectionView: UICollectionView!
 
-    var collectionViewSource = LocationsDataSource()
+    var collectionViewSource = LocationsCollectionViewDataSource()
 
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clearColor()

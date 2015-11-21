@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension LocationsDataSource: UICollectionViewDataSource, UICollectionViewDelegate {
+class LocationsCollectionViewDataSource: LocationsDataSource, UICollectionViewDataSource, UICollectionViewDelegate {
 
     func prepare(collectionView collectionView: UICollectionView) {
         let nib = UINib(nibName: LocationsDataSource.reuseIdentifier, bundle: nil)
