@@ -58,7 +58,6 @@ class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
     }
 
     func didChangeLocations(locations: [Location]) {
-        print("changed locations: \(locations)")
         Location.toDefaults(locations)
     }
 }
