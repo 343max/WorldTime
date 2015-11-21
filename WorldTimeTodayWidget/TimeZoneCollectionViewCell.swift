@@ -16,10 +16,7 @@ extension NSAttributedString {
 
 class TimeZoneCollectionViewCell: UICollectionViewCell {
     static let preferedHeight: CGFloat = 50.0
-    static let timeFormatter: NSDateFormatter = with(NSDateFormatter()) { timeFormatter in
-        timeFormatter.dateStyle = .NoStyle
-        timeFormatter.timeStyle = .ShortStyle
-    }
+    static let timeFormatter = NSDateFormatter.shortTime()
 
     static func preferredItemSize(collectionViewWidth viewWidth: CGFloat, itemCount: Int) -> CGSize {
         return CGSize(width: viewWidth / CGFloat(itemCount),
@@ -55,9 +52,7 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
     }
 
     @objc func updateTime() {
-        TimeZoneCollectionViewCell.timeFormatter.timeZone = location.timeZone
-        
-        let timeString = NSMutableAttributedString(string: TimeZoneCollectionViewCell.timeFormatter.stringFromDate(NSDate()))
+        let timeString = NSMutableAttributedString(string: location.stringFromDate(NSDate(), formatter: TimeZoneCollectionViewCell.timeFormatter))
         let locationString = NSMutableAttributedString(string: location.name)
         
         if (timeHidden) {

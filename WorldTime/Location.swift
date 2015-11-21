@@ -59,6 +59,13 @@ extension Location {
 }
 
 extension Location {
+    func stringFromDate(date: NSDate, formatter: NSDateFormatter) -> String {
+        formatter.timeZone = timeZone
+        return formatter.stringFromDate(date)
+    }
+}
+
+extension Location {
     static var locationsKey = "Locations"
     static var userDefaults = NSUserDefaults.standardUserDefaults()
 

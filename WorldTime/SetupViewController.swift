@@ -9,9 +9,9 @@
 import UIKit
 
 class SetupViewController: UIViewController {
-    let collectionViewSource = LocationsCollectionViewDataSource()
+    let dataSource = LocationsTableViewDataSource()
 
-    weak var collectionView: UICollectionView!
+    weak var tableView: UITableView!
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -27,23 +27,19 @@ class SetupViewController: UIViewController {
 
         view.backgroundColor = UIColor.whiteColor()
 
-        let layout = WorldTimeLayout()
+        let tableView = UITableView(frame: view.bounds, style: .Plain)
+        tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        tableView.dataSource = dataSource
+        tableView.delegate = dataSource
 
-        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
-        self.collectionView = collectionView
-        collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        view.addSubview(collectionView)
-
-        collectionViewSource.prepare(collectionView: collectionView)
-
-        collectionView.frame = self.view.bounds
-        collectionView.backgroundColor = UIColor.clearColor()
+        view.addSubview(tableView)
+        self.tableView = tableView
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        collectionViewSource.locations = Location.fromDefaults()
+        dataSource.locations = Location.fromDefaults()
     }
 }
 
