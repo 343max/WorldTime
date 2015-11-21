@@ -46,7 +46,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLayoutSubviews()
 
         self.collectionView.frame = self.view.bounds
-        collectionViewSource.updateItemSize(collectionView: self.collectionView)
     }
 
     func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {

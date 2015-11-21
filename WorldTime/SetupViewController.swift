@@ -27,9 +27,7 @@ class SetupViewController: UIViewController {
 
         view.backgroundColor = UIColor.whiteColor()
 
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 0.0
-        layout.minimumLineSpacing = 0.0
+        let layout = WorldTimeLayout()
 
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         self.collectionView = collectionView
@@ -46,13 +44,6 @@ class SetupViewController: UIViewController {
         super.viewWillAppear(animated)
 
         collectionViewSource.locations = Location.fromDefaults()
-        collectionViewSource.updateItemSize(collectionView: collectionView)
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        collectionViewSource.updateItemSize(collectionView: collectionView)
     }
 }
 

@@ -28,6 +28,8 @@
 		BBB3932B1BB4E94200518D0F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2734119D0FD9F00D4E7D4 /* Helper.swift */; };
 		BBD173381C00353D0025B32F /* LocationsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */; };
 		BBD173391C00371A0025B32F /* LocationsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */; };
+		BBD1733B1C00390A0025B32F /* WorldTimeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1733A1C00390A0025B32F /* WorldTimeLayout.swift */; };
+		BBD1733C1C0039B30025B32F /* WorldTimeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1733A1C00390A0025B32F /* WorldTimeLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,7 @@
 		BBB393231BB4D3B300518D0F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsDataSource.swift; sourceTree = "<group>"; };
 		BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		BBD1733A1C00390A0025B32F /* WorldTimeLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldTimeLayout.swift; sourceTree = "<group>"; };
 		BBE8CF921B7AF0BF000A7277 /* WorldTimeTodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WorldTimeTodayWidget.entitlements; sourceTree = "<group>"; };
 		BBE8CF931B7AF0DD000A7277 /* WorldTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WorldTime.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +156,7 @@
 				BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */,
 				50F2734119D0FD9F00D4E7D4 /* Helper.swift */,
 				BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */,
+				BBD1733A1C00390A0025B32F /* WorldTimeLayout.swift */,
 			);
 			path = WorldTime;
 			sourceTree = "<group>";
@@ -362,6 +366,7 @@
 				BBB393291BB4E92A00518D0F /* TimeZoneCollectionViewCell.swift in Sources */,
 				BBB393241BB4D3B300518D0F /* Location.swift in Sources */,
 				BBD173381C00353D0025B32F /* LocationsCollectionViewDataSource.swift in Sources */,
+				BBD1733B1C00390A0025B32F /* WorldTimeLayout.swift in Sources */,
 				5080792C19CEFE4000606C28 /* AppDelegate.swift in Sources */,
 				BBB3932B1BB4E94200518D0F /* Helper.swift in Sources */,
 			);
@@ -379,6 +384,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBD1733C1C0039B30025B32F /* WorldTimeLayout.swift in Sources */,
 				50006B8C19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.swift in Sources */,
 				5080795719CEFE6000606C28 /* TodayViewController.swift in Sources */,
 				BBD173391C00371A0025B32F /* LocationsCollectionViewDataSource.swift in Sources */,

@@ -44,14 +44,8 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
     }
 
     override func awakeFromNib() {
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.orangeColor()
         super.awakeFromNib()
-
-        let selectedBackgroundView = UIView();
-        self.selectedBackgroundView = selectedBackgroundView
-        selectedBackgroundView.backgroundColor = UIColor.orangeColor()
-        insertSubview(selectedBackgroundView, atIndex: 0)
-
     }
     
     override func prepareForReuse() {
