@@ -10,16 +10,15 @@ import UIKit
 
 class WorldTimeLayout: UICollectionViewLayout {
     let cellHeight: CGFloat = 50.0
+    let columns = 2
 
-    var itemCount: Int = 0
-    var columns: Int = 0
-    var rows: Int = 0
+    var itemCount = 0
+    var rows = 0
 
     override func prepareLayout() {
         super.prepareLayout()
 
         guard let dataSource = self.collectionView?.dataSource, let collectionView = self.collectionView else {
-            columns = 0
             rows = 0
             itemCount = 0
             return
@@ -27,12 +26,6 @@ class WorldTimeLayout: UICollectionViewLayout {
 
         assert(dataSource.numberOfSectionsInCollectionView?(collectionView) == 1)
         itemCount = dataSource.collectionView(collectionView, numberOfItemsInSection: 0)
-        if itemCount % 3 == 0 || itemCount > 9 {
-            columns = 3
-        } else {
-            columns = 2
-        }
-
         rows = Int(ceil(Float(itemCount) / Float(columns)))
     }
 
