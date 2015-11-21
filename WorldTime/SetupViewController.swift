@@ -9,7 +9,7 @@
 import UIKit
 
 class SetupViewController: UIViewController {
-    let collectionViewSource = LocationsCollectionViewDataSource()
+    let collectionViewSource = LocationsDataSource()
 
     weak var collectionView: UICollectionView!
 
@@ -36,7 +36,7 @@ class SetupViewController: UIViewController {
         collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         view.addSubview(collectionView)
 
-        collectionViewSource.collectionView = collectionView
+        collectionViewSource.prepare(collectionView: collectionView)
         collectionViewSource.textColor = UIColor.blackColor()
 
         collectionView.frame = self.view.bounds
@@ -47,13 +47,13 @@ class SetupViewController: UIViewController {
         super.viewWillAppear(animated)
 
         collectionViewSource.locations = Location.fromDefaults()
-        collectionViewSource.updateItemSize()
+        collectionViewSource.updateItemSize(collectionView: collectionView)
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        collectionViewSource.updateItemSize()
+        collectionViewSource.updateItemSize(collectionView: collectionView)
     }
 }
 

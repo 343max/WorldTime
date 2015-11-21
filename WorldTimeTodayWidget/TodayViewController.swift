@@ -12,16 +12,15 @@ import NotificationCenter
 class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var collectionView: UICollectionView!
 
-    var collectionViewSource = LocationsCollectionViewDataSource()
+    var collectionViewSource = LocationsDataSource()
 
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clearColor()
         
         self.preferredContentSize = CGSize(width: 0, height: TimeZoneCollectionViewCell.preferedHeight)
 
-        collectionViewSource.collectionView = collectionView
-
         collectionView.backgroundColor = UIColor.clearColor()
+        collectionViewSource.prepare(collectionView: collectionView)
 
         super.viewDidLoad()
     }
@@ -47,7 +46,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLayoutSubviews()
 
         self.collectionView.frame = self.view.bounds
-        collectionViewSource.updateItemSize()
+        collectionViewSource.updateItemSize(collectionView: self.collectionView)
     }
 
     func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
