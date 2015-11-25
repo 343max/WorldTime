@@ -12,6 +12,7 @@ class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
     let dataSource = LocationsEditorDataSource()
 
     weak var tableView: UITableView!
+    var minuteChangeNotifier: MinuteChangeNotifier?
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -55,6 +56,14 @@ class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
         super.viewWillAppear(animated)
 
         dataSource.locations = Location.fromDefaults()
+
+        self.minuteChangeNotifier = MinuteChangeNotifier(delegate: self)
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        self.minuteChangeNotifier = nil
     }
 
     func didChangeLocations(locations: [Location]) {
@@ -62,3 +71,13 @@ class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
     }
 }
 
+extension SetupViewController: MinuteChangeNotifierDelegate {
+    func minuteDidChange(notifier: MinuteChangeNotifier) {
+        for cell in self.tableView.visibleCells {
+            if let indexPath = self.tableView.indexPathForCell(cell) {
+                let location = dataSource.locations[indexPath.row]
+                dataSource.updateTimeInCell(cell, location: location)
+            }
+        }
+    }
+}

@@ -21,6 +21,10 @@ class LocationsEditorDataSource: LocationsDataSource, UITableViewDataSource, UIT
 
     weak var delegate: LocationsEditorDataSourceDelegate?
 
+    func updateTimeInCell(cell: UITableViewCell, location: Location) {
+        cell.detailTextLabel?.text = location.stringFromDate(NSDate(), formatter: LocationsEditorDataSource.timeFormatter)
+    }
+
     func addLocation(location: Location, tableView: UITableView) {
         let indexPath = NSIndexPath(forRow: locations.count, inSection: 0)
         locations.append(location)
@@ -46,7 +50,7 @@ class LocationsEditorDataSource: LocationsDataSource, UITableViewDataSource, UIT
 
         let location = locations[indexPath.row]
         cell.textLabel?.text = location.name
-        cell.detailTextLabel?.text = location.stringFromDate(NSDate(), formatter: LocationsEditorDataSource.timeFormatter)
+        self.updateTimeInCell(cell, location: location)
 
         return cell
     }
