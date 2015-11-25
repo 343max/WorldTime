@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window = window
 
-        window.rootViewController = UINavigationController(rootViewController: SetupViewController())
+        window.rootViewController = UINavigationController(rootViewController: LocationsEditorViewController())
         window.makeKeyAndVisible()
 
         return true

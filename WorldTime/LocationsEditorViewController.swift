@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
+class LocationsEditorViewController: UIViewController, LocationsEditorDataSourceDelegate {
     let dataSource = LocationsEditorDataSource()
 
     weak var tableView: UITableView!
@@ -71,7 +71,7 @@ class SetupViewController: UIViewController, LocationsEditorDataSourceDelegate {
     }
 }
 
-extension SetupViewController: MinuteChangeNotifierDelegate {
+extension LocationsEditorViewController: MinuteChangeNotifierDelegate {
     func minuteDidChange(notifier: MinuteChangeNotifier) {
         for cell in self.tableView.visibleCells {
             if let indexPath = self.tableView.indexPathForCell(cell) {
