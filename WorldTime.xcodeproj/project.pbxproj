@@ -91,13 +91,13 @@
 		5080795619CEFE6000606C28 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		5080795819CEFE6000606C28 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		50F2734119D0FD9F00D4E7D4 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = WorldTimeTodayWidget/Helper.swift; sourceTree = SOURCE_ROOT; };
-		BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinuteChangeNotifier.swift; sourceTree = "<group>"; };
-		BBB393231BB4D3B300518D0F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsDataSource.swift; sourceTree = "<group>"; };
-		BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsCollectionViewDataSource.swift; sourceTree = "<group>"; };
-		BBD1733A1C00390A0025B32F /* WorldTimeLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldTimeLayout.swift; sourceTree = "<group>"; };
+		BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MinuteChangeNotifier.swift; path = WorldTime/MinuteChangeNotifier.swift; sourceTree = "<group>"; };
+		BBB393231BB4D3B300518D0F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = WorldTime/Location.swift; sourceTree = "<group>"; };
+		BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationsDataSource.swift; path = WorldTime/LocationsDataSource.swift; sourceTree = "<group>"; };
+		BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationsCollectionViewDataSource.swift; path = ../WorldTime/LocationsCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		BBD1733A1C00390A0025B32F /* WorldTimeLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldTimeLayout.swift; path = ../WorldTime/WorldTimeLayout.swift; sourceTree = "<group>"; };
 		BBD1733D1C003DC20025B32F /* LocationsEditorDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsEditorDataSource.swift; sourceTree = "<group>"; };
-		BBD173401C0041620025B32F /* NSDateFormatter+ShortTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDateFormatter+ShortTime.swift"; sourceTree = "<group>"; };
+		BBD173401C0041620025B32F /* NSDateFormatter+ShortTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDateFormatter+ShortTime.swift"; path = "WorldTime/NSDateFormatter+ShortTime.swift"; sourceTree = "<group>"; };
 		BBE8CF921B7AF0BF000A7277 /* WorldTimeTodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WorldTimeTodayWidget.entitlements; sourceTree = "<group>"; };
 		BBE8CF931B7AF0DD000A7277 /* WorldTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WorldTime.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +131,7 @@
 		5080791D19CEFE4000606C28 = {
 			isa = PBXGroup;
 			children = (
+				BB503ACB1C0577F8002D3897 /* Shared */,
 				5080792819CEFE4000606C28 /* WorldTime */,
 				5080793E19CEFE4100606C28 /* WorldTimeTests */,
 				5080795319CEFE6000606C28 /* WorldTimeTodayWidget */,
@@ -152,18 +153,13 @@
 		5080792819CEFE4000606C28 /* WorldTime */ = {
 			isa = PBXGroup;
 			children = (
-				BBE8CF931B7AF0DD000A7277 /* WorldTime.entitlements */,
 				5080792B19CEFE4000606C28 /* AppDelegate.swift */,
-				5080792D19CEFE4100606C28 /* SetupViewController.swift */,
 				5080793219CEFE4100606C28 /* Images.xcassets */,
 				5080793419CEFE4100606C28 /* LaunchScreen.xib */,
+				BBD1733D1C003DC20025B32F /* LocationsEditorDataSource.swift */,
+				5080792D19CEFE4100606C28 /* SetupViewController.swift */,
 				5080792919CEFE4000606C28 /* Supporting Files */,
-				BBB393231BB4D3B300518D0F /* Location.swift */,
-				BBD1733F1C003DC80025B32F /* LocationsDataSource */,
-				50F2734119D0FD9F00D4E7D4 /* Helper.swift */,
-				BBD1733A1C00390A0025B32F /* WorldTimeLayout.swift */,
-				BBD173401C0041620025B32F /* NSDateFormatter+ShortTime.swift */,
-				BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */,
+				BBE8CF931B7AF0DD000A7277 /* WorldTime.entitlements */,
 			);
 			path = WorldTime;
 			sourceTree = "<group>";
@@ -204,12 +200,14 @@
 		5080795319CEFE6000606C28 /* WorldTimeTodayWidget */ = {
 			isa = PBXGroup;
 			children = (
-				BBE8CF921B7AF0BF000A7277 /* WorldTimeTodayWidget.entitlements */,
-				5080795619CEFE6000606C28 /* TodayViewController.swift */,
+				BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */,
 				5080795819CEFE6000606C28 /* MainInterface.storyboard */,
 				5080795419CEFE6000606C28 /* Supporting Files */,
 				50006B8A19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.swift */,
 				50006B8B19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.xib */,
+				5080795619CEFE6000606C28 /* TodayViewController.swift */,
+				BBD1733A1C00390A0025B32F /* WorldTimeLayout.swift */,
+				BBE8CF921B7AF0BF000A7277 /* WorldTimeTodayWidget.entitlements */,
 			);
 			path = WorldTimeTodayWidget;
 			sourceTree = "<group>";
@@ -222,14 +220,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BBD1733F1C003DC80025B32F /* LocationsDataSource */ = {
+		BB503ACB1C0577F8002D3897 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				50F2734119D0FD9F00D4E7D4 /* Helper.swift */,
+				BBB393231BB4D3B300518D0F /* Location.swift */,
 				BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */,
-				BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */,
-				BBD1733D1C003DC20025B32F /* LocationsEditorDataSource.swift */,
+				BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */,
+				BBD173401C0041620025B32F /* NSDateFormatter+ShortTime.swift */,
 			);
-			name = LocationsDataSource;
+			name = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
