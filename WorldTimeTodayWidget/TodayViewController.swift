@@ -13,6 +13,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var collectionView: UICollectionView!
 
     var collectionViewSource = LocationsCollectionViewDataSource()
+    var minuteChangeNotifier: MinuteChangeNotifier?
 
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clearColor()
@@ -30,6 +31,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
         setup()
 
+        self.minuteChangeNotifier = MinuteChangeNotifier(delegate: self)
         self.timeHidden = false
     }
     
@@ -37,6 +39,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewWillDisappear(animated)
 
         self.timeHidden = true
+        self.minuteChangeNotifier = nil
     }
 
     func setup() {
@@ -71,6 +74,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         didSet(oldTimeHidden) {
             collectionViewSource.timeHidden = timeHidden
             collectionView.reloadData()
+        }
+    }
+}
+
+extension TodayViewController: MinuteChangeNotifierDelegate {
+    func minuteDidChange(notifier: MinuteChangeNotifier) {
+        for cell in collectionView.visibleCells() {
+            if let cell = cell as? TimeZoneCollectionViewCell {
+                cell.updateTime()
+            }
         }
     }
 }

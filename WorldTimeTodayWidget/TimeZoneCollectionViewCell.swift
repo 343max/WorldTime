@@ -24,13 +24,10 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
     }
 
     @IBOutlet weak var timeLabel: UILabel!
-    private var timer: NSTimer?
-    
+
     var location: Location! {
         didSet(oldLocation) {
             updateTime()
-            timer?.invalidate()
-            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateTime", userInfo: nil, repeats: true)
         }
     }
     
@@ -45,13 +42,7 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        timer?.invalidate()
-        timer = nil
-    }
-
-    @objc func updateTime() {
+    func updateTime() {
         let timeString = NSMutableAttributedString(string: location.stringFromDate(NSDate(), formatter: TimeZoneCollectionViewCell.timeFormatter))
         let locationString = NSMutableAttributedString(string: location.name)
         

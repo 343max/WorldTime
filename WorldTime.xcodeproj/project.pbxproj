@@ -20,6 +20,7 @@
 		5080795C19CEFE6000606C28 /* WorldTimeTodayWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5080794F19CEFE6000606C28 /* WorldTimeTodayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		50F2734219D0FD9F00D4E7D4 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2734119D0FD9F00D4E7D4 /* Helper.swift */; };
 		BB7B37741C05575C009C3495 /* MinuteChangeNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */; };
+		BB7B37751C056478009C3495 /* MinuteChangeNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */; };
 		BBB393241BB4D3B300518D0F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393231BB4D3B300518D0F /* Location.swift */; };
 		BBB393251BB4D3CB00518D0F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393231BB4D3B300518D0F /* Location.swift */; };
 		BBB393271BB4E6A200518D0F /* LocationsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */; };
@@ -402,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD1733C1C0039B30025B32F /* WorldTimeLayout.swift in Sources */,
+				BB7B37751C056478009C3495 /* MinuteChangeNotifier.swift in Sources */,
 				50006B8C19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.swift in Sources */,
 				BBD173421C0041D20025B32F /* NSDateFormatter+ShortTime.swift in Sources */,
 				5080795719CEFE6000606C28 /* TodayViewController.swift in Sources */,
