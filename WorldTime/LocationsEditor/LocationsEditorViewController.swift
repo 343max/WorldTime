@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationsEditorViewController: UIViewController, LocationsEditorDataSourceDelegate {
+class LocationsEditorViewController: UIViewController {
     let dataSource = LocationsEditorDataSource()
 
     weak var tableView: UITableView!
@@ -65,9 +65,16 @@ class LocationsEditorViewController: UIViewController, LocationsEditorDataSource
 
         self.minuteChangeNotifier = nil
     }
+}
 
+extension LocationsEditorViewController: LocationsEditorDataSourceDelegate {
     func didChangeLocations(locations: [Location]) {
         Location.toDefaults(locations)
+    }
+
+    func didSelectLocation(location: Location) {
+        let editorViewController = LocationEditorViewController.fromXib(location)
+        self.navigationController?.pushViewController(editorViewController, animated: true)
     }
 }
 

@@ -11,6 +11,7 @@ import UIKit
 protocol LocationsEditorDataSourceDelegate: class {
 
     func didChangeLocations(locations: [Location])
+    func didSelectLocation(location: Location)
 
 }
 
@@ -79,5 +80,9 @@ class LocationsEditorDataSource: LocationsDataSource, UITableViewDataSource, UIT
 
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.delegate?.didSelectLocation(locations[indexPath.row])
     }
 }
