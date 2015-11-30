@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationEditorViewController: UIViewController {
+class LocationEditorViewController: UITableViewController {
     var location: Location! {
         didSet {
             if isViewLoaded() {
@@ -18,6 +18,7 @@ class LocationEditorViewController: UIViewController {
     }
 
     @IBOutlet weak var locationNameTextField: UITextField!
+    @IBOutlet weak var timeZoneCell: UITableViewCell!
 
     static func fromXib(location: Location) -> LocationEditorViewController {
         let storyboard = UIStoryboard(name: "LocationEditorViewController", bundle: nil)
@@ -36,6 +37,7 @@ class LocationEditorViewController: UIViewController {
 
     func updateLocation(location: Location) {
         locationNameTextField.text = location.name
+        timeZoneCell.textLabel?.text = location.timeZone.localizedName(.Standard, locale: NSLocale.currentLocale())
     }
     
     @IBAction func tappedPickTimeZone(sender: AnyObject) {
