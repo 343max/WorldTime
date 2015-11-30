@@ -60,6 +60,14 @@ class LocationsListViewController: UIViewController {
         self.minuteChangeNotifier = MinuteChangeNotifier(delegate: self)
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+    }
+
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
 
@@ -72,8 +80,8 @@ extension LocationsListViewController: LocationsListDataSourceDelegate {
         Location.toDefaults(locations)
     }
 
-    func didSelectLocation(location: Location) {
-        let editorViewController = LocationEditorViewController.fromXib(location)
+    func didSelectLocation(location: Location, index: Int) {
+        let editorViewController = LocationEditorViewController.fromXib(location, index: index)
         editorViewController.delegate = self
         self.navigationController?.pushViewController(editorViewController, animated: true)
     }
@@ -91,8 +99,11 @@ extension LocationsListViewController: MinuteChangeNotifierDelegate {
 }
 
 extension LocationsListViewController: LocationEditorDelegate {
-    func locationEditorDidEditLocation(oldLocation: Location, newLocation: Location) {
-        let index = self.dataSource.locations.indexOf(oldLocation)
-
+    func locationEditorDidEditLocation(index index: Int, newLocation: Location) {
+        var locations = dataSource.locations
+        locations[index] = newLocation
+        dataSource.locations = locations
+        tableView.reloadData()
+        didChangeLocations(locations)
     }
 }

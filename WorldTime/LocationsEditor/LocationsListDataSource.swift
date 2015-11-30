@@ -11,7 +11,7 @@ import UIKit
 protocol LocationsListDataSourceDelegate: class {
 
     func didChangeLocations(locations: [Location])
-    func didSelectLocation(location: Location)
+    func didSelectLocation(location: Location, index: Int)
 
 }
 
@@ -84,6 +84,6 @@ class LocationsListDataSource: LocationsDataSource, UITableViewDataSource, UITab
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.delegate?.didSelectLocation(locations[indexPath.row])
+        self.delegate?.didSelectLocation(locations[indexPath.row], index: indexPath.row)
     }
 }
