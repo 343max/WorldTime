@@ -24,6 +24,7 @@
 		BB51719A1C058900007F6BF9 /* LocationEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB5171991C058900007F6BF9 /* LocationEditorViewController.storyboard */; };
 		BB7B37741C05575C009C3495 /* MinuteChangeNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */; };
 		BB7B37751C056478009C3495 /* MinuteChangeNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */; };
+		BBA4CCD41C0BBCFF00DA2848 /* TimeZonePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4CCD31C0BBCFF00DA2848 /* TimeZonePickerViewController.swift */; };
 		BBB393241BB4D3B300518D0F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393231BB4D3B300518D0F /* Location.swift */; };
 		BBB393251BB4D3CB00518D0F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393231BB4D3B300518D0F /* Location.swift */; };
 		BBB393271BB4E6A200518D0F /* LocationsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */; };
@@ -97,6 +98,7 @@
 		BB5171941C057F27007F6BF9 /* LocationEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorViewController.swift; sourceTree = "<group>"; };
 		BB5171991C058900007F6BF9 /* LocationEditorViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LocationEditorViewController.storyboard; sourceTree = "<group>"; };
 		BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MinuteChangeNotifier.swift; path = WorldTime/MinuteChangeNotifier.swift; sourceTree = "<group>"; };
+		BBA4CCD31C0BBCFF00DA2848 /* TimeZonePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZonePickerViewController.swift; sourceTree = "<group>"; };
 		BBB393231BB4D3B300518D0F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = WorldTime/Location.swift; sourceTree = "<group>"; };
 		BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationsDataSource.swift; path = WorldTime/LocationsDataSource.swift; sourceTree = "<group>"; };
 		BBD173371C00353D0025B32F /* LocationsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationsCollectionViewDataSource.swift; path = ../WorldTime/LocationsCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				BBE8CF931B7AF0DD000A7277 /* WorldTime.entitlements */,
 				62DEB5ADD1928EA445D2E4B1 /* LocationsEditor */,
 				BB5171981C057F2C007F6BF9 /* LocationEditor */,
+				BBA4CCD21C0BBCE500DA2848 /* TimeZonePicker */,
 			);
 			path = WorldTime;
 			sourceTree = "<group>";
@@ -252,6 +255,14 @@
 				BB5171991C058900007F6BF9 /* LocationEditorViewController.storyboard */,
 			);
 			name = LocationEditor;
+			sourceTree = "<group>";
+		};
+		BBA4CCD21C0BBCE500DA2848 /* TimeZonePicker */ = {
+			isa = PBXGroup;
+			children = (
+				BBA4CCD31C0BBCFF00DA2848 /* TimeZonePickerViewController.swift */,
+			);
+			name = TimeZonePicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +416,7 @@
 				BBD173411C0041620025B32F /* NSDateFormatter+ShortTime.swift in Sources */,
 				BBB393271BB4E6A200518D0F /* LocationsDataSource.swift in Sources */,
 				BBB393291BB4E92A00518D0F /* TimeZoneCollectionViewCell.swift in Sources */,
+				BBA4CCD41C0BBCFF00DA2848 /* TimeZonePickerViewController.swift in Sources */,
 				BBB393241BB4D3B300518D0F /* Location.swift in Sources */,
 				5080792C19CEFE4000606C28 /* AppDelegate.swift in Sources */,
 				BB5171961C057F27007F6BF9 /* LocationEditorViewController.swift in Sources */,

@@ -8,40 +8,10 @@
 
 import UIKit
 
-class TimeZoneDataSource: NSObject, UITableViewDataSource {
-    let reuseIdentifier = "Cell"
-    let locale: NSLocale
-    let timeZones: [NSTimeZone]
-
-    init(locale: NSLocale) {
-        self.locale = locale
-        self.timeZones = NSTimeZone.knownTimeZoneNames().map() { NSTimeZone(name: $0)! }
-        super.init()
-    }
-
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timeZones.count
-    }
-
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) ?? UITableViewCell(style: .Subtitle, reuseIdentifier: reuseIdentifier)
-        let timeZone = timeZones[indexPath.row]
-        cell.textLabel?.text = timeZone.localizedName(.Standard, locale: locale)
-        cell.detailTextLabel?.text = timeZone.name
-        return cell
-    }
-}
-
 class LocationEditorViewController: UIViewController {
     var location: Location!
-    var dataSoure: TimeZoneDataSource!
 
     @IBOutlet weak var locationNameTextField: UITextField!
-    @IBOutlet weak var timeZoneTableView: UITableView!
 
     static func fromXib(location: Location) -> LocationEditorViewController {
         let storyboard = UIStoryboard(name: "LocationEditorViewController", bundle: nil)
@@ -56,8 +26,11 @@ class LocationEditorViewController: UIViewController {
         super.viewDidLoad()
 
         locationNameTextField.text = location.name
-
-        dataSoure = TimeZoneDataSource(locale: NSLocale.currentLocale())
-        timeZoneTableView.dataSource = dataSoure
+    }
+    
+    @IBAction func tappedPickTimeZone(sender: AnyObject) {
+        let timeZonePicker = TimeZonePickerViewController(location: location)
+        let navigationController = UINavigationController(rootViewController: timeZonePicker)
+        self.presentViewController(navigationController, animated: true, completion: nil)
     }
 }

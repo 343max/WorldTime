@@ -51,6 +51,7 @@ class LocationsEditorDataSource: LocationsDataSource, UITableViewDataSource, UIT
 
         let location = locations[indexPath.row]
         cell.textLabel?.text = location.name
+        cell.accessoryType = .DisclosureIndicator
         self.updateTimeInCell(cell, location: location)
 
         return cell
