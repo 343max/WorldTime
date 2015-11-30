@@ -39,17 +39,22 @@ class LocationEditorViewController: UITableViewController {
         locationNameTextField.text = location.name
         timeZoneCell.textLabel?.text = location.timeZone.localizedName(.Standard, locale: NSLocale.currentLocale())
     }
-    
-    @IBAction func tappedPickTimeZone(sender: AnyObject) {
-        let timeZonePicker = TimeZonePicker(timeZone: location.timeZone)
-        timeZonePicker.delegate = self
-        let navigationController = UINavigationController(rootViewController: timeZonePicker)
-        self.presentViewController(navigationController, animated: true, completion: nil)
-    }
 }
 
 extension LocationEditorViewController: TimeZonePickerDelegate {
     func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: NSTimeZone) {
         location.timeZone = timeZone
+    }
+}
+
+extension LocationEditorViewController {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if cell == timeZoneCell {
+            let timeZonePicker = TimeZonePicker(timeZone: location.timeZone)
+            timeZonePicker.delegate = self
+            let navigationController = UINavigationController(rootViewController: timeZonePicker)
+            self.presentViewController(navigationController, animated: true, completion: nil)
+        }
     }
 }
