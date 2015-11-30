@@ -53,7 +53,7 @@ class TimeZoneDataSource: NSObject, UITableViewDataSource {
         case 0:
             filteredTimeZones = timeZones
         default:
-            filteredTimeZones = timeZones.filter { $0.pseudoCleanedName.rangeOfString(needle) != nil }
+            filteredTimeZones = timeZones.filter { $0.pseudoCleanedName.localizedStandardContainsString(needle) }
         }
     }
 
