@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TimeZonePickerDelegate: class {
-    func timzeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone: NSTimeZone)
+    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: NSTimeZone)
 }
 
 extension NSTimeZone {
@@ -135,7 +135,7 @@ extension TimeZonePicker: UITableViewDelegate {
 
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
-            self.delegate?.timzeZonePicker(self, didSelectTimeZone: timeZone)
+            self.delegate?.timeZonePicker(self, didSelectTimeZone: timeZone)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }

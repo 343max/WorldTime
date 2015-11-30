@@ -9,8 +9,8 @@
 import Foundation
 
 struct Location {
-    let name: String
-    let timeZone: NSTimeZone
+    var name: String
+    var timeZone: NSTimeZone
 
     init(name: String, timeZone: NSTimeZone) {
         self.name = name
