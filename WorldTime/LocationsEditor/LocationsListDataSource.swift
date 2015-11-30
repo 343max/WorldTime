@@ -33,6 +33,13 @@ class LocationsListDataSource: LocationsDataSource, UITableViewDataSource, UITab
         self.delegate?.didChangeLocations(locations)
     }
 
+    func updateLocation(location: Location, index: Int, tableView: UITableView) {
+        let indexPath = NSIndexPath(forRow: index, inSection: 0)
+        locations[index] = location
+        tableView.reloadRowsAtIndexPaths([ indexPath ], withRowAnimation: .Automatic)
+        self.delegate?.didChangeLocations(locations)
+    }
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

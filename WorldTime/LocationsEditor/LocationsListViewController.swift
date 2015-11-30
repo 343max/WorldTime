@@ -34,8 +34,10 @@ class LocationsListViewController: UIViewController {
     }
 
     @objc func addLocation(sender: AnyObject?) {
-        let location = Location(name: "New York", timeZoneAbbrevation: "EST")
-        dataSource.addLocation(location, tableView: tableView)
+        let timeZonePicker = TimeZonePicker()
+        timeZonePicker.delegate = self
+        let navigationController = UINavigationController(rootViewController: timeZonePicker)
+        presentViewController(navigationController, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
@@ -100,10 +102,13 @@ extension LocationsListViewController: MinuteChangeNotifierDelegate {
 
 extension LocationsListViewController: LocationEditorDelegate {
     func locationEditorDidEditLocation(index index: Int, newLocation: Location) {
-        var locations = dataSource.locations
-        locations[index] = newLocation
-        dataSource.locations = locations
-        tableView.reloadData()
-        didChangeLocations(locations)
+        dataSource.updateLocation(newLocation, index: index, tableView: tableView)
+    }
+}
+
+extension LocationsListViewController: TimeZonePickerDelegate {
+    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: NSTimeZone) {
+        let location = Location(name: timeZone.pseudoLocalizedShortName, timeZone: timeZone)
+        dataSource.addLocation(location, tableView: tableView)
     }
 }

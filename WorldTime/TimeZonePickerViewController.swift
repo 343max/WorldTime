@@ -19,16 +19,18 @@ extension NSTimeZone {
         }
     }
 
+    var pseudoNameParts: [String] {
+        return self.pseudoCleanedName.characters.split{ $0 == "/" }.map(String.init)
+    }
+
     var pseudoLocalizedName: String {
         get {
-            let parts = self.pseudoCleanedName.characters.split{ $0 == "/" }.map(String.init)
-            if parts.count == 1 {
-                return parts[0]
-            } else {
-                let reverse = Array(parts.reverse())
-                return "\(reverse[0]), \(reverse[1])"
-            }
+            return Array(self.pseudoNameParts.reverse()).joinWithSeparator(", ")
         }
+    }
+
+    var pseudoLocalizedShortName: String {
+        return self.pseudoNameParts.last!
     }
 }
 
@@ -80,6 +82,10 @@ class TimeZonePicker: UIViewController {
     let dataSource: TimeZoneDataSource
     var tableView: UITableView!
     weak var delegate: TimeZonePickerDelegate?
+
+    convenience init() {
+        self.init(timeZone: nil)
+    }
 
     init(timeZone: NSTimeZone?) {
         dataSource = TimeZoneDataSource(locale: NSLocale.currentLocale(), activeTimeZone: timeZone)
