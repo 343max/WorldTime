@@ -8,8 +8,8 @@
 
 import UIKit
 
-class LocationsEditorViewController: UIViewController {
-    let dataSource = LocationsEditorDataSource()
+class LocationsListViewController: UIViewController {
+    let dataSource = LocationsListDataSource()
 
     weak var tableView: UITableView!
     var minuteChangeNotifier: MinuteChangeNotifier?
@@ -67,18 +67,19 @@ class LocationsEditorViewController: UIViewController {
     }
 }
 
-extension LocationsEditorViewController: LocationsEditorDataSourceDelegate {
+extension LocationsListViewController: LocationsListDataSourceDelegate {
     func didChangeLocations(locations: [Location]) {
         Location.toDefaults(locations)
     }
 
     func didSelectLocation(location: Location) {
         let editorViewController = LocationEditorViewController.fromXib(location)
+        editorViewController.delegate = self
         self.navigationController?.pushViewController(editorViewController, animated: true)
     }
 }
 
-extension LocationsEditorViewController: MinuteChangeNotifierDelegate {
+extension LocationsListViewController: MinuteChangeNotifierDelegate {
     func minuteDidChange(notifier: MinuteChangeNotifier) {
         for cell in self.tableView.visibleCells {
             if let indexPath = self.tableView.indexPathForCell(cell) {
@@ -86,5 +87,12 @@ extension LocationsEditorViewController: MinuteChangeNotifierDelegate {
                 dataSource.updateTimeInCell(cell, location: location)
             }
         }
+    }
+}
+
+extension LocationsListViewController: LocationEditorDelegate {
+    func locationEditorDidEditLocation(oldLocation: Location, newLocation: Location) {
+        let index = self.dataSource.locations.indexOf(oldLocation)
+
     }
 }

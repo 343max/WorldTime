@@ -18,8 +18,8 @@
 		5080795919CEFE6000606C28 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5080795819CEFE6000606C28 /* MainInterface.storyboard */; };
 		5080795C19CEFE6000606C28 /* WorldTimeTodayWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5080794F19CEFE6000606C28 /* WorldTimeTodayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		50F2734219D0FD9F00D4E7D4 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2734119D0FD9F00D4E7D4 /* Helper.swift */; };
-		62DEB11E397208513334B4E9 /* LocationsEditorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DEB01FE4E3ED3A047C5FA5 /* LocationsEditorDataSource.swift */; };
-		62DEBAAE220C9D015DC9C5C0 /* LocationsEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DEB4FD616BD85E059F4D2B /* LocationsEditorViewController.swift */; };
+		62DEB11E397208513334B4E9 /* LocationsListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DEB01FE4E3ED3A047C5FA5 /* LocationsListDataSource.swift */; };
+		62DEBAAE220C9D015DC9C5C0 /* LocationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DEB4FD616BD85E059F4D2B /* LocationsListViewController.swift */; };
 		BB5171961C057F27007F6BF9 /* LocationEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5171941C057F27007F6BF9 /* LocationEditorViewController.swift */; };
 		BB51719A1C058900007F6BF9 /* LocationEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB5171991C058900007F6BF9 /* LocationEditorViewController.storyboard */; };
 		BB7B37741C05575C009C3495 /* MinuteChangeNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */; };
@@ -93,8 +93,8 @@
 		5080795619CEFE6000606C28 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		5080795819CEFE6000606C28 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		50F2734119D0FD9F00D4E7D4 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = WorldTimeTodayWidget/Helper.swift; sourceTree = SOURCE_ROOT; };
-		62DEB01FE4E3ED3A047C5FA5 /* LocationsEditorDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsEditorDataSource.swift; sourceTree = "<group>"; };
-		62DEB4FD616BD85E059F4D2B /* LocationsEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsEditorViewController.swift; sourceTree = "<group>"; };
+		62DEB01FE4E3ED3A047C5FA5 /* LocationsListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsListDataSource.swift; sourceTree = "<group>"; };
+		62DEB4FD616BD85E059F4D2B /* LocationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsListViewController.swift; sourceTree = "<group>"; };
 		BB5171941C057F27007F6BF9 /* LocationEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorViewController.swift; sourceTree = "<group>"; };
 		BB5171991C058900007F6BF9 /* LocationEditorViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LocationEditorViewController.storyboard; sourceTree = "<group>"; };
 		BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MinuteChangeNotifier.swift; path = WorldTime/MinuteChangeNotifier.swift; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 				5080793419CEFE4100606C28 /* LaunchScreen.xib */,
 				5080792919CEFE4000606C28 /* Supporting Files */,
 				BBE8CF931B7AF0DD000A7277 /* WorldTime.entitlements */,
-				62DEB5ADD1928EA445D2E4B1 /* LocationsEditor */,
+				62DEB5ADD1928EA445D2E4B1 /* LocationsList */,
 				BB5171981C057F2C007F6BF9 /* LocationEditor */,
 				BBA4CCD21C0BBCE500DA2848 /* TimeZonePicker */,
 			);
@@ -227,12 +227,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		62DEB5ADD1928EA445D2E4B1 /* LocationsEditor */ = {
+		62DEB5ADD1928EA445D2E4B1 /* LocationsList */ = {
 			isa = PBXGroup;
 			children = (
-				62DEB01FE4E3ED3A047C5FA5 /* LocationsEditorDataSource.swift */,
-				62DEB4FD616BD85E059F4D2B /* LocationsEditorViewController.swift */,
+				62DEB01FE4E3ED3A047C5FA5 /* LocationsListDataSource.swift */,
+				62DEB4FD616BD85E059F4D2B /* LocationsListViewController.swift */,
 			);
+			name = LocationsList;
 			path = LocationsEditor;
 			sourceTree = "<group>";
 		};
@@ -421,8 +422,8 @@
 				5080792C19CEFE4000606C28 /* AppDelegate.swift in Sources */,
 				BB5171961C057F27007F6BF9 /* LocationEditorViewController.swift in Sources */,
 				BBB3932B1BB4E94200518D0F /* Helper.swift in Sources */,
-				62DEB11E397208513334B4E9 /* LocationsEditorDataSource.swift in Sources */,
-				62DEBAAE220C9D015DC9C5C0 /* LocationsEditorViewController.swift in Sources */,
+				62DEB11E397208513334B4E9 /* LocationsListDataSource.swift in Sources */,
+				62DEBAAE220C9D015DC9C5C0 /* LocationsListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

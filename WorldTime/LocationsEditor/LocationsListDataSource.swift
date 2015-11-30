@@ -8,22 +8,22 @@
 
 import UIKit
 
-protocol LocationsEditorDataSourceDelegate: class {
+protocol LocationsListDataSourceDelegate: class {
 
     func didChangeLocations(locations: [Location])
     func didSelectLocation(location: Location)
 
 }
 
-class LocationsEditorDataSource: LocationsDataSource, UITableViewDataSource, UITableViewDelegate {
+class LocationsListDataSource: LocationsDataSource, UITableViewDataSource, UITableViewDelegate {
     static let timeFormatter = NSDateFormatter.shortTime()
 
     let reuseIdentifier = "LocationSetupCell"
 
-    weak var delegate: LocationsEditorDataSourceDelegate?
+    weak var delegate: LocationsListDataSourceDelegate?
 
     func updateTimeInCell(cell: UITableViewCell, location: Location) {
-        cell.detailTextLabel?.text = location.stringFromDate(NSDate(), formatter: LocationsEditorDataSource.timeFormatter)
+        cell.detailTextLabel?.text = location.stringFromDate(NSDate(), formatter: LocationsListDataSource.timeFormatter)
     }
 
     func addLocation(location: Location, tableView: UITableView) {
