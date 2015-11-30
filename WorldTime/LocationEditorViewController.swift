@@ -29,7 +29,7 @@ class LocationEditorViewController: UIViewController {
     }
     
     @IBAction func tappedPickTimeZone(sender: AnyObject) {
-        let timeZonePicker = TimeZonePickerViewController(location: location)
+        let timeZonePicker = TimeZonePicker(timeZone: location.timeZone)
         let navigationController = UINavigationController(rootViewController: timeZonePicker)
         self.presentViewController(navigationController, animated: true, completion: nil)
     }
