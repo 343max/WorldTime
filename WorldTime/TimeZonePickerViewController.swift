@@ -117,7 +117,7 @@ class TimeZonePicker: UIViewController {
 
         if let timeZone = self.dataSource.activeTimeZone {
             if let index = dataSource.timeZones.index(of: timeZone) {
-                let indexPath = NSIndexPath(row: index, section: 0)
+                let indexPath = IndexPath(row: index, section: 0)
                 tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: false)
             }
         }

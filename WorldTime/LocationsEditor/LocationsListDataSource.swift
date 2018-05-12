@@ -27,14 +27,14 @@ class LocationsListDataSource: LocationsDataSource, UITableViewDataSource, UITab
     }
 
     func add(location: Location, tableView: UITableView) {
-        let indexPath = NSIndexPath(row: locations.count, section: 0)
+        let indexPath = IndexPath(row: locations.count, section: 0)
         locations.append(location)
         tableView.insertRows(at: [ indexPath as IndexPath ], with: .automatic)
         self.delegate?.didChange(locations: locations)
     }
 
     func update(location: Location, index: Int, tableView: UITableView) {
-        let indexPath = NSIndexPath(row: index, section: 0)
+        let indexPath = IndexPath(row: index, section: 0)
         locations[index] = location
         tableView.reloadRows(at: [ indexPath as IndexPath ], with: .automatic)
         self.delegate?.didChange(locations: locations)
