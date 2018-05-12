@@ -39,7 +39,6 @@ class WorldTimeLayout: UICollectionViewLayout {
             }
             
             return CGSize(width: collectionView.bounds.width, height: CGFloat(rows) * cellHeight)
-            
         }
     }
     

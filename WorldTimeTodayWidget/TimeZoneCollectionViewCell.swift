@@ -52,9 +52,12 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
         timeString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24.0), range: timeString.fullRange())
         locationString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 14.0), range: locationString.fullRange())
         
-        timeString.append(NSAttributedString(string: "\n"))
-        timeString.append(locationString)
-        
-        timeLabel.attributedText = timeString
+        timeLabel.attributedText = [locationString, timeString].reduce(NSMutableAttributedString()) { (concatenatedString, line) -> NSMutableAttributedString in
+            if concatenatedString.length != 0 {
+                concatenatedString.append(NSAttributedString(string: "\n"))
+            }
+            concatenatedString.append(line)
+            return concatenatedString
+        }
     }
 }
