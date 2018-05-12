@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17E202" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,17 +14,16 @@
             <rect key="frame" x="0.0" y="0.0" width="227" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="227" height="310"/>
+                <rect key="frame" x="0.0" y="0.0" width="227" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cH9-OV-0B0">
-                        <rect key="frame" x="0.0" y="0.0" width="227" height="50"/>
+                        <rect key="frame" x="10" y="0.0" width="207" height="50"/>
                         <attributedString key="attributedText">
-                            <fragment content="Label">
+                            <fragment content="12:54">
                                 <attributes>
-                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <font key="NSFont" size="17" name="HelveticaNeue"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    <font key="NSFont" metaFont="system" size="17"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
                         </attributedString>
@@ -32,18 +31,17 @@
                     </label>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="cH9-OV-0B0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Phm-oU-wHF"/>
+                <constraint firstItem="cH9-OV-0B0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="EiV-AC-UXO"/>
                 <constraint firstAttribute="bottom" secondItem="cH9-OV-0B0" secondAttribute="bottom" id="aiH-0f-s9K"/>
-                <constraint firstAttribute="trailing" secondItem="cH9-OV-0B0" secondAttribute="trailing" id="o2B-e4-Q4u"/>
+                <constraint firstAttribute="trailing" secondItem="cH9-OV-0B0" secondAttribute="trailing" constant="10" id="gwo-FA-Cli"/>
                 <constraint firstItem="cH9-OV-0B0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="oiS-AX-qn5"/>
             </constraints>
             <size key="customSize" width="227" height="50"/>
             <connections>
                 <outlet property="timeLabel" destination="cH9-OV-0B0" id="RD6-tH-Vfa"/>
             </connections>
-            <point key="canvasLocation" x="554.5" y="407"/>
+            <point key="canvasLocation" x="137.5" y="340"/>
         </collectionViewCell>
     </objects>
 </document>
