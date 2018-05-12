@@ -68,7 +68,7 @@ extension Location {
 }
 
 extension Location {
-    func stringFromDate(date: NSDate, formatter: DateFormatter) -> String {
+    func stringFrom(date: Date, formatter: DateFormatter) -> String {
         formatter.timeZone = timeZone as TimeZone!
         return formatter.string(from: date as Date)
     }

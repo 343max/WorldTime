@@ -16,12 +16,12 @@ class MinuteChangeNotifier {
     var timer: Timer!
     weak var delegate: MinuteChangeNotifierDelegate?
 
-    static func nextMinute(fromDate date: NSDate) -> NSDate {
+    static func nextMinute(fromDate date: Date) -> Date {
         let calendar = NSCalendar.current
         var components = calendar.dateComponents([.era, .year, .month, .day, .hour, .minute], from: date as Date)
         components.second = 0
         components.minute = components.minute! + 1
-        return calendar.date(from: components) as NSDate!
+        return calendar.date(from: components)!
     }
 
     deinit {
@@ -29,7 +29,7 @@ class MinuteChangeNotifier {
     }
 
     init(delegate: MinuteChangeNotifierDelegate) {
-        let date = MinuteChangeNotifier.nextMinute(fromDate: NSDate())
+        let date = MinuteChangeNotifier.nextMinute(fromDate: Date())
         timer = Timer(fireAt: date as Date, interval: 60.0, target: self, selector: #selector(timerFired), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
         self.delegate = delegate

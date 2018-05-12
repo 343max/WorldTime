@@ -43,7 +43,7 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
     }
     
     func updateTime() {
-        let timeString = NSMutableAttributedString(string: location.stringFromDate(date: NSDate(), formatter: TimeZoneCollectionViewCell.timeFormatter))
+        let timeString = NSMutableAttributedString(string: location.stringFrom(date: Date(), formatter: TimeZoneCollectionViewCell.timeFormatter))
         let locationString = NSMutableAttributedString(string: location.name)
         
         if (timeHidden) {

@@ -23,7 +23,7 @@ class LocationsListDataSource: LocationsDataSource, UITableViewDataSource, UITab
     weak var delegate: LocationsListDataSourceDelegate?
 
     func updateTimeInCell(cell: UITableViewCell, location: Location) {
-        cell.detailTextLabel?.text = location.stringFromDate(date: NSDate(), formatter: LocationsListDataSource.timeFormatter)
+        cell.detailTextLabel?.text = location.stringFrom(date: Date(), formatter: LocationsListDataSource.timeFormatter)
     }
 
     func add(location: Location, tableView: UITableView) {
