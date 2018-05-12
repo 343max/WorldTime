@@ -1,10 +1,4 @@
-//
-//  Helper.swift
-//  GiantPhotoCollection
-//
-//  Created by Max von Webel on 31/07/14.
-//  Copyright (c) 2014 Max von Webel. All rights reserved.
-//
+// Copyright 2014-present Max von Webel. All Rights Reserved.
 
 import Foundation
 

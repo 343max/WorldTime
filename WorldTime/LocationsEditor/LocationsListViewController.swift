@@ -1,10 +1,4 @@
-//
-//  ViewController.swift
-//  WorldTime
-//
-//  Created by Max von Webel on 21/09/14.
-//  Copyright (c) 2014 Max von Webel. All rights reserved.
-//
+// Copyright 2014-present Max von Webel. All Rights Reserved.
 
 import UIKit
 

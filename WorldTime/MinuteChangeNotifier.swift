@@ -1,10 +1,4 @@
-//
-//  MinuteChangeNotification.swift
-//  WorldTime
-//
-//  Created by Max von Webel on 24.11.15.
-//  Copyright © 2015 Max von Webel. All rights reserved.
-//
+// Copyright 2014-present Max von Webel. All Rights Reserved.
 
 import Foundation
 
