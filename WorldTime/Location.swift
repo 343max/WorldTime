@@ -10,22 +10,22 @@ import Foundation
 
 struct Location {
     var name: String
-    var timeZone: NSTimeZone
+    var timeZone: TimeZone
 
-    init(name: String, timeZone: NSTimeZone) {
+    init(name: String, timeZone: TimeZone) {
         self.name = name
         self.timeZone = timeZone;
     }
 
     init(name: String, timeZoneAbbrevation: String) {
-        guard let timeZone = NSTimeZone(abbreviation: timeZoneAbbrevation) else {
+        guard let timeZone = TimeZone(abbreviation: timeZoneAbbrevation) else {
             fatalError("couldn't create timeZone: \(timeZoneAbbrevation)")
         }
         self.init(name: name, timeZone: timeZone)
     }
 
     init(name: String, timeZoneName: String) {
-        guard let timeZone = NSTimeZone(name: timeZoneName) else {
+        guard let timeZone = TimeZone(identifier: timeZoneName) else {
             fatalError("couldn't create timeZone: \(timeZoneName)")
         }
         self.init(name: name, timeZone: timeZone)
@@ -49,7 +49,7 @@ extension Location {
         get {
             return [
                 Location.nameKey: self.name as AnyObject,
-                Location.timeZoneNameKey: self.timeZone.name as AnyObject
+                Location.timeZoneNameKey: self.timeZone.identifier as AnyObject
             ]
         }
     }

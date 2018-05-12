@@ -9,13 +9,13 @@
 import UIKit
 
 protocol TimeZonePickerDelegate: class {
-    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: NSTimeZone)
+    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: TimeZone)
 }
 
-extension NSTimeZone {
+extension TimeZone {
     var pseudoCleanedName: String {
         get {
-            return String(name.characters.map({ $0 == "_" ? " " : $0 }))
+            return String(identifier.characters.map({ $0 == "_" ? " " : $0 }))
         }
     }
 
@@ -37,15 +37,15 @@ extension NSTimeZone {
 class TimeZoneDataSource: NSObject, UITableViewDataSource {
     let reuseIdentifier = "Cell"
     let locale: Locale
-    let timeZones: [NSTimeZone]
+    let timeZones: [TimeZone]
 
-    var filteredTimeZones: [NSTimeZone]
-    var activeTimeZone: NSTimeZone?
+    var filteredTimeZones: [TimeZone]
+    var activeTimeZone: TimeZone?
 
-    init(locale: Locale, activeTimeZone: NSTimeZone?) {
+    init(locale: Locale, activeTimeZone: TimeZone?) {
         self.locale = locale
         self.activeTimeZone = activeTimeZone
-        timeZones = NSTimeZone.knownTimeZoneNames.map() { NSTimeZone(name: $0)! }
+        timeZones = TimeZone.knownTimeZoneIdentifiers.map() { TimeZone(identifier: $0)! }
         filteredTimeZones = timeZones
         super.init()
     }
@@ -71,7 +71,7 @@ class TimeZoneDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: reuseIdentifier)
         let timeZone = filteredTimeZones[indexPath.row]
         cell.textLabel?.text = timeZone.pseudoLocalizedName
-        cell.detailTextLabel?.text = timeZone.localizedName(.standard, locale: locale as Locale)
+        cell.detailTextLabel?.text = timeZone.localizedName(for: .standard, locale: locale as Locale)
         cell.accessoryType = timeZone == activeTimeZone ? .checkmark : .none
         return cell
     }
@@ -87,7 +87,7 @@ class TimeZonePicker: UIViewController {
         self.init(timeZone: nil)
     }
 
-    init(timeZone: NSTimeZone?) {
+    init(timeZone: TimeZone?) {
         dataSource = TimeZoneDataSource(locale: Locale.current, activeTimeZone: timeZone)
         super.init(nibName: nil, bundle: nil)
 

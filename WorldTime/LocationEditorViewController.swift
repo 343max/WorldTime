@@ -49,12 +49,12 @@ class LocationEditorViewController: UITableViewController {
     func update(location: Location) {
         locationNameTextField.text = location.name
         timeZoneCell.textLabel?.text = location.timeZone.pseudoLocalizedName
-        timeZoneCell.detailTextLabel?.text = location.timeZone.localizedName(.standard, locale: Locale.current)
+        timeZoneCell.detailTextLabel?.text = location.timeZone.localizedName(for: .standard, locale: Locale.current)
     }
 }
 
 extension LocationEditorViewController: TimeZonePickerDelegate {
-    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: NSTimeZone) {
+    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: TimeZone) {
         location.timeZone = timeZone
     }
 }

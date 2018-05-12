@@ -107,7 +107,7 @@ extension LocationsListViewController: LocationEditorDelegate {
 }
 
 extension LocationsListViewController: TimeZonePickerDelegate {
-    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: NSTimeZone) {
+    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: TimeZone) {
         let location = Location(name: timeZone.pseudoLocalizedShortName, timeZone: timeZone)
         dataSource.add(location: location, tableView: tableView)
     }
