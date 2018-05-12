@@ -49,7 +49,7 @@ class LocationEditorViewController: UITableViewController {
     func update(location: Location) {
         locationNameTextField.text = location.name
         timeZoneCell.textLabel?.text = location.timeZone.pseudoLocalizedName
-        timeZoneCell.detailTextLabel?.text = location.timeZone.localizedName(.standard, locale: NSLocale.current)
+        timeZoneCell.detailTextLabel?.text = location.timeZone.localizedName(.standard, locale: Locale.current)
     }
 }
 

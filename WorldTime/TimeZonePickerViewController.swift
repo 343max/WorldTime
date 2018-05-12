@@ -88,7 +88,7 @@ class TimeZonePicker: UIViewController {
     }
 
     init(timeZone: NSTimeZone?) {
-        dataSource = TimeZoneDataSource(locale: NSLocale.current, activeTimeZone: timeZone)
+        dataSource = TimeZoneDataSource(locale: Locale.current, activeTimeZone: timeZone)
         super.init(nibName: nil, bundle: nil)
 
         searchBar.sizeToFit()
