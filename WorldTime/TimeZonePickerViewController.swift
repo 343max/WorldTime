@@ -25,7 +25,7 @@ extension NSTimeZone {
 
     var pseudoLocalizedName: String {
         get {
-            return Array(self.pseudoNameParts.reverse()).joinWithSeparator(", ")
+            return Array(self.pseudoNameParts.reversed()).joined(separator: ", ")
         }
     }
 
@@ -36,16 +36,16 @@ extension NSTimeZone {
 
 class TimeZoneDataSource: NSObject, UITableViewDataSource {
     let reuseIdentifier = "Cell"
-    let locale: NSLocale
+    let locale: Locale
     let timeZones: [NSTimeZone]
 
     var filteredTimeZones: [NSTimeZone]
     var activeTimeZone: NSTimeZone?
 
-    init(locale: NSLocale, activeTimeZone: NSTimeZone?) {
+    init(locale: Locale, activeTimeZone: NSTimeZone?) {
         self.locale = locale
         self.activeTimeZone = activeTimeZone
-        timeZones = NSTimeZone.knownTimeZoneNames().map() { NSTimeZone(name: $0)! }
+        timeZones = NSTimeZone.knownTimeZoneNames.map() { NSTimeZone(name: $0)! }
         filteredTimeZones = timeZones
         super.init()
     }
@@ -55,7 +55,7 @@ class TimeZoneDataSource: NSObject, UITableViewDataSource {
         case 0:
             filteredTimeZones = timeZones
         default:
-            filteredTimeZones = timeZones.filter { $0.pseudoCleanedName.localizedStandardContainsString(needle) }
+            filteredTimeZones = timeZones.filter { $0.pseudoCleanedName.localizedStandardContains(needle) }
         }
     }
 
@@ -63,16 +63,16 @@ class TimeZoneDataSource: NSObject, UITableViewDataSource {
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredTimeZones.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) ?? UITableViewCell(style: .Subtitle, reuseIdentifier: reuseIdentifier)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: reuseIdentifier)
         let timeZone = filteredTimeZones[indexPath.row]
         cell.textLabel?.text = timeZone.pseudoLocalizedName
-        cell.detailTextLabel?.text = timeZone.localizedName(.Standard, locale: locale)
-        cell.accessoryType = timeZone == activeTimeZone ? .Checkmark : .None
+        cell.detailTextLabel?.text = timeZone.localizedName(.standard, locale: locale as Locale)
+        cell.accessoryType = timeZone == activeTimeZone ? .checkmark : .none
         return cell
     }
 }
@@ -88,14 +88,14 @@ class TimeZonePicker: UIViewController {
     }
 
     init(timeZone: NSTimeZone?) {
-        dataSource = TimeZoneDataSource(locale: NSLocale.currentLocale(), activeTimeZone: timeZone)
+        dataSource = TimeZoneDataSource(locale: NSLocale.current, activeTimeZone: timeZone)
         super.init(nibName: nil, bundle: nil)
 
         searchBar.sizeToFit()
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar
         self.navigationItem.prompt = NSLocalizedString("Pick Time Zone", comment: "Time Zone Picker Prompt")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "tappedCancel:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tappedCancel))
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -103,22 +103,22 @@ class TimeZonePicker: UIViewController {
     }
 
     @objc func tappedCancel(sender: AnyObject?) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let tableView = UITableView(frame: view.bounds, style: .Plain)
-        tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        let tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.dataSource = dataSource
         tableView.delegate = self
-        tableView.keyboardDismissMode = .OnDrag
+        tableView.keyboardDismissMode = .onDrag
 
         if let timeZone = self.dataSource.activeTimeZone {
-            if let index = dataSource.timeZones.indexOf(timeZone) {
-                let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
+            if let index = dataSource.timeZones.index(of: timeZone) {
+                let indexPath = NSIndexPath(row: index, section: 0)
+                tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: false)
             }
         }
 
@@ -126,34 +126,33 @@ class TimeZonePicker: UIViewController {
         self.tableView = tableView
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         searchBar.becomeFirstResponder()
     }
 }
 
 extension TimeZonePicker: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.accessoryType = .Checkmark
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath as IndexPath)
+        cell?.accessoryType = .checkmark
 
         let timeZone = dataSource.filteredTimeZones[indexPath.row]
 
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
-            self.delegate?.timeZonePicker(self, didSelectTimeZone: timeZone)
-            self.dismissViewControllerAnimated(true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.delegate?.timeZonePicker(timeZonePicker: self, didSelectTimeZone: timeZone)
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }
 
 extension TimeZonePicker: UISearchBarDelegate {
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        dataSource.filter(searchText)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        dataSource.filter(needle: searchText)
         tableView.reloadData()
     }
 
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
 }

@@ -20,8 +20,8 @@ class WorldTimeLayout: UICollectionViewLayout {
         rows = Int(ceil(Float(itemCount) / Float(columns)))
     }
 
-    override func prepareLayout() {
-        super.prepareLayout()
+    override func prepare() {
+        super.prepare()
 
         guard let dataSource = self.collectionView?.dataSource, let collectionView = self.collectionView else {
             rows = 0
@@ -29,19 +29,22 @@ class WorldTimeLayout: UICollectionViewLayout {
             return
         }
 
-        assert(dataSource.numberOfSectionsInCollectionView?(collectionView) == 1)
-        self.prepareLayout(dataSource.collectionView(collectionView, numberOfItemsInSection: 0))
+//        assert(dataSource.numberOfSections == 1)
+        self.prepareLayout(itemCount: dataSource.collectionView(collectionView, numberOfItemsInSection: 0))
     }
 
-    override func collectionViewContentSize() -> CGSize {
-        guard let collectionView = self.collectionView else {
-            return CGSize.zero
+    override var collectionViewContentSize: CGSize {
+        get {
+            guard let collectionView = self.collectionView else {
+                return CGSize.zero
+            }
+            
+            return CGSize(width: collectionView.bounds.width, height: CGFloat(rows) * cellHeight)
+            
         }
-
-        return CGSize(width: collectionView.bounds.width, height: CGFloat(rows) * cellHeight)
     }
-
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let collectionView = self.collectionView else {
             return []
         }
@@ -49,7 +52,7 @@ class WorldTimeLayout: UICollectionViewLayout {
         let itemSize = CGSize(width: collectionView.bounds.width / CGFloat(columns), height: cellHeight)
         let range = 0..<itemCount
         return range.map({ (i) -> UICollectionViewLayoutAttributes in
-            let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: NSIndexPath(forItem: i, inSection: 0))
+            let attributes = UICollectionViewLayoutAttributes(forCellWith: NSIndexPath(item: i, section: 0) as IndexPath)
             let column = i % columns
             let row = (i - column) / columns
             let origin = CGPoint(x: itemSize.width * CGFloat(column), y: itemSize.height * CGFloat(row))

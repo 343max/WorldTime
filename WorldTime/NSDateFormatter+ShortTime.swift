@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension NSDateFormatter {
-    static func shortTime() -> NSDateFormatter {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .NoStyle
-        formatter.timeStyle = .ShortStyle
+extension DateFormatter {
+    static func shortTime() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
         return formatter
     }
 }

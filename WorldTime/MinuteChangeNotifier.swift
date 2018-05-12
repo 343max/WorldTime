@@ -13,15 +13,15 @@ protocol MinuteChangeNotifierDelegate: class {
 }
 
 class MinuteChangeNotifier {
-    var timer: NSTimer!
+    var timer: Timer!
     weak var delegate: MinuteChangeNotifierDelegate?
 
     static func nextMinute(fromDate date: NSDate) -> NSDate {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Era, .Year, .Month, .Day, .Hour, .Minute], fromDate: date)
+        let calendar = NSCalendar.current
+        var components = calendar.dateComponents([.era, .year, .month, .day, .hour, .minute], from: date as Date)
         components.second = 0
-        components.minute += 1
-        return calendar.dateFromComponents(components)!
+        components.minute = components.minute! + 1
+        return calendar.date(from: components) as NSDate!
     }
 
     deinit {
@@ -30,12 +30,12 @@ class MinuteChangeNotifier {
 
     init(delegate: MinuteChangeNotifierDelegate) {
         let date = MinuteChangeNotifier.nextMinute(fromDate: NSDate())
-        timer = NSTimer(fireDate: date, interval: 60.0, target: self, selector: "timerFired:", userInfo: nil, repeats: true)
-        NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
+        timer = Timer(fireAt: date as Date, interval: 60.0, target: self, selector: #selector(timerFired), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
         self.delegate = delegate
     }
 
-    @objc func timerFired(timer: NSTimer) {
-        self.delegate?.minuteDidChange(self)
+    @objc func timerFired(timer: Timer) {
+        self.delegate?.minuteDidChange(notifier: self)
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LocationEditorDelegate: class {
-    func locationEditorDidEditLocation(index index: Int, newLocation: Location)
+    func locationEditorDidEditLocation(index: Int, newLocation: Location)
 }
 
 class LocationEditorViewController: UITableViewController {
@@ -17,8 +17,8 @@ class LocationEditorViewController: UITableViewController {
     var location: Location! {
         didSet {
             self.delegate?.locationEditorDidEditLocation(index: index, newLocation: location)
-            if isViewLoaded() {
-                updateLocation(location)
+            if isViewLoaded {
+                update(location: location)
             }
         }
     }
@@ -43,13 +43,13 @@ class LocationEditorViewController: UITableViewController {
 
         locationNameTextField.delegate = self
 
-        updateLocation(location)
+        update(location: location)
     }
 
-    func updateLocation(location: Location) {
+    func update(location: Location) {
         locationNameTextField.text = location.name
         timeZoneCell.textLabel?.text = location.timeZone.pseudoLocalizedName
-        timeZoneCell.detailTextLabel?.text = location.timeZone.localizedName(.Standard, locale: NSLocale.currentLocale())
+        timeZoneCell.detailTextLabel?.text = location.timeZone.localizedName(.standard, locale: NSLocale.current)
     }
 }
 
@@ -60,26 +60,26 @@ extension LocationEditorViewController: TimeZonePickerDelegate {
 }
 
 extension LocationEditorViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(textField: UITextField) {
-        if let name = textField.text where name.characters.count > 0 {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let name = textField.text, name.characters.count > 0 {
             self.location.name = name
         }
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
     }
 }
 
 extension LocationEditorViewController {
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath as IndexPath)
         if cell == timeZoneCell {
             let timeZonePicker = TimeZonePicker(timeZone: location.timeZone)
             timeZonePicker.delegate = self
             let navigationController = UINavigationController(rootViewController: timeZonePicker)
-            self.presentViewController(navigationController, animated: true, completion: nil)
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
 }

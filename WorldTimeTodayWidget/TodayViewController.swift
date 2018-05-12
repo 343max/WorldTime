@@ -16,9 +16,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var minuteChangeNotifier: MinuteChangeNotifier?
 
     override func viewDidLoad() {
-        self.view.backgroundColor = UIColor.clearColor()
+        self.view.backgroundColor = UIColor.clear
 
-        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.backgroundColor = UIColor.clear
         collectionViewSource.prepare(collectionView: collectionView)
 
         setup()
@@ -26,7 +26,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         setup()
@@ -35,7 +35,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.timeHidden = false
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         self.timeHidden = true
@@ -50,12 +50,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             fatalError("not a WorldTimeLayout")
         }
 
-        layout.prepareLayout(collectionViewSource.locations.count)
-        self.preferredContentSize = layout.collectionViewContentSize()
+        layout.prepareLayout(itemCount: collectionViewSource.locations.count)
+        self.preferredContentSize = layout.collectionViewContentSize
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
-        completionHandler(NCUpdateResult.NewData)
+        completionHandler(NCUpdateResult.newData)
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,7 +80,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
 extension TodayViewController: MinuteChangeNotifierDelegate {
     func minuteDidChange(notifier: MinuteChangeNotifier) {
-        for cell in collectionView.visibleCells() {
+        for cell in collectionView.visibleCells {
             if let cell = cell as? TimeZoneCollectionViewCell {
                 cell.updateTime()
             }

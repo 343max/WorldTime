@@ -48,13 +48,13 @@ extension Location {
     var dictionary: Location.Dictionary {
         get {
             return [
-                Location.nameKey: self.name,
-                Location.timeZoneNameKey: self.timeZone.name
+                Location.nameKey: self.name as AnyObject,
+                Location.timeZoneNameKey: self.timeZone.name as AnyObject
             ]
         }
     }
 
-    static func from(arrayOfDicts arrayOfDicts: [Location.Dictionary]) -> [Location] {
+    static func from(arrayOfDicts: [Location.Dictionary]) -> [Location] {
         return arrayOfDicts.flatMap() { (dict) -> Location? in
             return Location(dictionary: dict)
         }
@@ -68,15 +68,15 @@ extension Location {
 }
 
 extension Location {
-    func stringFromDate(date: NSDate, formatter: NSDateFormatter) -> String {
-        formatter.timeZone = timeZone
-        return formatter.stringFromDate(date)
+    func stringFromDate(date: NSDate, formatter: DateFormatter) -> String {
+        formatter.timeZone = timeZone as TimeZone!
+        return formatter.string(from: date as Date)
     }
 }
 
 extension Location {
     static var locationsKey = "Locations"
-    static var userDefaults = NSUserDefaults(suiteName: "group.de.343max.WorldTime")!
+    static var userDefaults = UserDefaults(suiteName: "group.de.343max.WorldTime")!
 
     static func defaultLocations() -> [Location] {
         return [
@@ -86,7 +86,7 @@ extension Location {
     }
 
     static func fromDefaults() -> [Location] {
-        guard let locations = Location.userDefaults.arrayForKey(locationsKey) as? [Location.Dictionary] else {
+        guard let locations = Location.userDefaults.array(forKey: locationsKey) as? [Location.Dictionary] else {
             return self.defaultLocations()
         }
 
@@ -94,7 +94,7 @@ extension Location {
     }
 
     static func toDefaults(locations: [Location]) {
-        self.userDefaults.setValue(self.arrayOfDicts(locations), forKey: self.locationsKey)
+        self.userDefaults.setValue(self.arrayOfDicts(locations: locations), forKey: self.locationsKey)
         self.userDefaults.synchronize()
     }
 }

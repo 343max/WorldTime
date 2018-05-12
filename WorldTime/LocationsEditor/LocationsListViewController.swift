@@ -14,21 +14,21 @@ class LocationsListViewController: UIViewController {
     weak var tableView: UITableView!
     var minuteChangeNotifier: MinuteChangeNotifier?
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         title = NSLocalizedString("World Time", comment: "nav bar title")
 
         dataSource.delegate = self
 
-        navigationItem.leftBarButtonItem = editButtonItem()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addLocation:")
+        navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addLocation))
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
     }
@@ -37,16 +37,16 @@ class LocationsListViewController: UIViewController {
         let timeZonePicker = TimeZonePicker()
         timeZonePicker.delegate = self
         let navigationController = UINavigationController(rootViewController: timeZonePicker)
-        presentViewController(navigationController, animated: true, completion: nil)
+        present(navigationController, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
 
-        let tableView = UITableView(frame: view.bounds, style: .Plain)
-        tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        let tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
 
@@ -54,7 +54,7 @@ class LocationsListViewController: UIViewController {
         self.tableView = tableView
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         dataSource.locations = Location.fromDefaults()
@@ -62,15 +62,15 @@ class LocationsListViewController: UIViewController {
         self.minuteChangeNotifier = MinuteChangeNotifier(delegate: self)
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
 
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         self.minuteChangeNotifier = nil
@@ -78,12 +78,12 @@ class LocationsListViewController: UIViewController {
 }
 
 extension LocationsListViewController: LocationsListDataSourceDelegate {
-    func didChangeLocations(locations: [Location]) {
-        Location.toDefaults(locations)
+    func didChange(locations: [Location]) {
+        Location.toDefaults(locations: locations)
     }
 
-    func didSelectLocation(location: Location, index: Int) {
-        let editorViewController = LocationEditorViewController.fromXib(location, index: index)
+    func didSelect(location: Location, index: Int) {
+        let editorViewController = LocationEditorViewController.fromXib(location: location, index: index)
         editorViewController.delegate = self
         self.navigationController?.pushViewController(editorViewController, animated: true)
     }
@@ -92,23 +92,23 @@ extension LocationsListViewController: LocationsListDataSourceDelegate {
 extension LocationsListViewController: MinuteChangeNotifierDelegate {
     func minuteDidChange(notifier: MinuteChangeNotifier) {
         for cell in self.tableView.visibleCells {
-            if let indexPath = self.tableView.indexPathForCell(cell) {
+            if let indexPath = self.tableView.indexPath(for: cell) {
                 let location = dataSource.locations[indexPath.row]
-                dataSource.updateTimeInCell(cell, location: location)
+                dataSource.updateTimeInCell(cell: cell, location: location)
             }
         }
     }
 }
 
 extension LocationsListViewController: LocationEditorDelegate {
-    func locationEditorDidEditLocation(index index: Int, newLocation: Location) {
-        dataSource.updateLocation(newLocation, index: index, tableView: tableView)
+    func locationEditorDidEditLocation(index: Int, newLocation: Location) {
+        dataSource.update(location: newLocation, index: index, tableView: tableView)
     }
 }
 
 extension LocationsListViewController: TimeZonePickerDelegate {
     func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: NSTimeZone) {
         let location = Location(name: timeZone.pseudoLocalizedShortName, timeZone: timeZone)
-        dataSource.addLocation(location, tableView: tableView)
+        dataSource.add(location: location, tableView: tableView)
     }
 }

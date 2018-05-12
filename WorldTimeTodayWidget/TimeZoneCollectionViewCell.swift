@@ -16,7 +16,7 @@ extension NSAttributedString {
 
 class TimeZoneCollectionViewCell: UICollectionViewCell {
     static let preferedHeight: CGFloat = 50.0
-    static let timeFormatter = NSDateFormatter.shortTime()
+    static let timeFormatter = DateFormatter.shortTime()
 
     static func preferredItemSize(collectionViewWidth viewWidth: CGFloat, itemCount: Int) -> CGSize {
         return CGSize(width: viewWidth / CGFloat(itemCount),
@@ -38,22 +38,22 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
     }
 
     override func awakeFromNib() {
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         super.awakeFromNib()
     }
     
     func updateTime() {
-        let timeString = NSMutableAttributedString(string: location.stringFromDate(NSDate(), formatter: TimeZoneCollectionViewCell.timeFormatter))
+        let timeString = NSMutableAttributedString(string: location.stringFromDate(date: NSDate(), formatter: TimeZoneCollectionViewCell.timeFormatter))
         let locationString = NSMutableAttributedString(string: location.name)
         
         if (timeHidden) {
-            timeString.addAttribute(NSForegroundColorAttributeName, value: UIColor.clearColor(), range: timeString.fullRange())
+            timeString.addAttribute(NSForegroundColorAttributeName, value: UIColor.clear, range: timeString.fullRange())
         }
-        timeString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(24.0), range: timeString.fullRange())
-        locationString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14.0), range: locationString.fullRange())
+        timeString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 24.0), range: timeString.fullRange())
+        locationString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 14.0), range: locationString.fullRange())
         
-        timeString.appendAttributedString(NSAttributedString(string: "\n"))
-        timeString.appendAttributedString(locationString)
+        timeString.append(NSAttributedString(string: "\n"))
+        timeString.append(locationString)
         
         timeLabel.attributedText = timeString
     }

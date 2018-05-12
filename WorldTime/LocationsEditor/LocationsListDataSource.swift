@@ -10,87 +10,87 @@ import UIKit
 
 protocol LocationsListDataSourceDelegate: class {
 
-    func didChangeLocations(locations: [Location])
-    func didSelectLocation(location: Location, index: Int)
+    func didChange(locations: [Location])
+    func didSelect(location: Location, index: Int)
 
 }
 
 class LocationsListDataSource: LocationsDataSource, UITableViewDataSource, UITableViewDelegate {
-    static let timeFormatter = NSDateFormatter.shortTime()
+    static let timeFormatter = DateFormatter.shortTime()
 
     let reuseIdentifier = "LocationSetupCell"
 
     weak var delegate: LocationsListDataSourceDelegate?
 
     func updateTimeInCell(cell: UITableViewCell, location: Location) {
-        cell.detailTextLabel?.text = location.stringFromDate(NSDate(), formatter: LocationsListDataSource.timeFormatter)
+        cell.detailTextLabel?.text = location.stringFromDate(date: NSDate(), formatter: LocationsListDataSource.timeFormatter)
     }
 
-    func addLocation(location: Location, tableView: UITableView) {
-        let indexPath = NSIndexPath(forRow: locations.count, inSection: 0)
+    func add(location: Location, tableView: UITableView) {
+        let indexPath = NSIndexPath(row: locations.count, section: 0)
         locations.append(location)
-        tableView.insertRowsAtIndexPaths([ indexPath ], withRowAnimation: .Automatic)
-        self.delegate?.didChangeLocations(locations)
+        tableView.insertRows(at: [ indexPath as IndexPath ], with: .automatic)
+        self.delegate?.didChange(locations: locations)
     }
 
-    func updateLocation(location: Location, index: Int, tableView: UITableView) {
-        let indexPath = NSIndexPath(forRow: index, inSection: 0)
+    func update(location: Location, index: Int, tableView: UITableView) {
+        let indexPath = NSIndexPath(row: index, section: 0)
         locations[index] = location
-        tableView.reloadRowsAtIndexPaths([ indexPath ], withRowAnimation: .Automatic)
-        self.delegate?.didChangeLocations(locations)
+        tableView.reloadRows(at: [ indexPath as IndexPath ], with: .automatic)
+        self.delegate?.didChange(locations: locations)
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return locations.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
-        if let dequeuedCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) {
+        if let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) {
             cell = dequeuedCell
         } else {
-            cell = UITableViewCell(style: .Value1, reuseIdentifier: reuseIdentifier)
+            cell = UITableViewCell(style: .value1, reuseIdentifier: reuseIdentifier)
         }
 
         let location = locations[indexPath.row]
         cell.textLabel?.text = location.name
-        cell.accessoryType = .DisclosureIndicator
-        self.updateTimeInCell(cell, location: location)
+        cell.accessoryType = .disclosureIndicator
+        self.updateTimeInCell(cell: cell, location: location)
 
         return cell
     }
 
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
-        case .Delete:
-            locations.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([ indexPath ], withRowAnimation: .Automatic)
-        case .Insert, .None:
+        case .delete:
+            locations.remove(at: indexPath.row)
+            tableView.deleteRows(at: [ indexPath as IndexPath ], with: .automatic)
+        case .insert, .none:
             fatalError("not implemented")
         }
-        self.delegate?.didChangeLocations(locations)
+        self.delegate?.didChange(locations: locations)
     }
 
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let location = locations[sourceIndexPath.row]
-        locations.removeAtIndex(sourceIndexPath.row)
-        locations.insert(location, atIndex: destinationIndexPath.row)
-        self.delegate?.didChangeLocations(locations)
+        locations.remove(at: sourceIndexPath.row)
+        locations.insert(location, at: destinationIndexPath.row)
+        self.delegate?.didChange(locations: locations)
     }
 
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.delegate?.didSelectLocation(locations[indexPath.row], index: indexPath.row)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.didSelect(location: locations[indexPath.row], index: indexPath.row)
     }
 }

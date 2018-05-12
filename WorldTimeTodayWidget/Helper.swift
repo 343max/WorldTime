@@ -8,7 +8,7 @@
 
 import Foundation
 
-func with<T>(object: T, block: (object: T) -> ()) -> T {
-    block(object: object)
+func with<T>(object: T, block: (_ object: T) -> ()) -> T {
+    block(object)
     return object
 }

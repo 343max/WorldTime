@@ -12,9 +12,9 @@ class LocationsCollectionViewDataSource: LocationsDataSource, UICollectionViewDa
     let reuseIdentifier = "TimeZoneCollectionViewCell"
     var timeHidden = false
 
-    func prepare(collectionView collectionView: UICollectionView) {
+    func prepare(collectionView: UICollectionView) {
         let nib = UINib(nibName: self.reuseIdentifier, bundle: nil)
-        collectionView.registerNib(nib, forCellWithReuseIdentifier: self.reuseIdentifier)
+        collectionView.register(nib, forCellWithReuseIdentifier: self.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -23,12 +23,12 @@ class LocationsCollectionViewDataSource: LocationsDataSource, UICollectionViewDa
         return 1
     }
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return locations.count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.reuseIdentifier, for: indexPath)
             as? TimeZoneCollectionViewCell else
         {
             assert(false)
