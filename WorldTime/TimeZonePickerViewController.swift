@@ -15,12 +15,12 @@ protocol TimeZonePickerDelegate: class {
 extension TimeZone {
     var pseudoCleanedName: String {
         get {
-            return String(identifier.characters.map({ $0 == "_" ? " " : $0 }))
+            return String(identifier.map({ $0 == "_" ? " " : $0 }))
         }
     }
 
     var pseudoNameParts: [String] {
-        return self.pseudoCleanedName.characters.split{ $0 == "/" }.map(String.init)
+        return self.pseudoCleanedName.split{ $0 == "/" }.map(String.init)
     }
 
     var pseudoLocalizedName: String {
@@ -51,10 +51,9 @@ class TimeZoneDataSource: NSObject, UITableViewDataSource {
     }
 
     func filter(needle: String) {
-        switch needle.characters.count {
-        case 0:
+        if needle.isEmpty {
             filteredTimeZones = timeZones
-        default:
+        } else {
             filteredTimeZones = timeZones.filter { $0.pseudoCleanedName.localizedStandardContains(needle) }
         }
     }

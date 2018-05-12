@@ -55,7 +55,7 @@ extension Location {
     }
 
     static func from(arrayOfDicts: [Location.Dictionary]) -> [Location] {
-        return arrayOfDicts.flatMap() { (dict) -> Location? in
+        return arrayOfDicts.compactMap() { (dict) -> Location? in
             return Location(dictionary: dict)
         }
     }
@@ -69,7 +69,7 @@ extension Location {
 
 extension Location {
     func stringFrom(date: Date, formatter: DateFormatter) -> String {
-        formatter.timeZone = timeZone as TimeZone!
+        formatter.timeZone = timeZone
         return formatter.string(from: date as Date)
     }
 }

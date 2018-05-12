@@ -61,7 +61,7 @@ extension LocationEditorViewController: TimeZonePickerDelegate {
 
 extension LocationEditorViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let name = textField.text, name.characters.count > 0 {
+        if let name = textField.text, !name.isEmpty {
             self.location.name = name
         }
     }
