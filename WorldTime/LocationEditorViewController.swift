@@ -54,7 +54,7 @@ class LocationEditorViewController: UITableViewController {
 }
 
 extension LocationEditorViewController: TimeZonePickerDelegate {
-    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: TimeZone) {
+    func timeZonePicker(_ timeZonePicker: TimeZonePicker, didSelect timeZone: TimeZone) {
         location.timeZone = timeZone
     }
 }

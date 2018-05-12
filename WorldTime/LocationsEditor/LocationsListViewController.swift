@@ -94,7 +94,7 @@ extension LocationsListViewController: MinuteChangeNotifierDelegate {
         for cell in self.tableView.visibleCells {
             if let indexPath = self.tableView.indexPath(for: cell) {
                 let location = dataSource.locations[indexPath.row]
-                dataSource.updateTimeInCell(cell: cell, location: location)
+                dataSource.updateTime(cell: cell, location: location)
             }
         }
     }
@@ -107,7 +107,7 @@ extension LocationsListViewController: LocationEditorDelegate {
 }
 
 extension LocationsListViewController: TimeZonePickerDelegate {
-    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: TimeZone) {
+    func timeZonePicker(_ timeZonePicker: TimeZonePicker, didSelect timeZone: TimeZone) {
         let location = Location(name: timeZone.pseudoLocalizedShortName, timeZone: timeZone)
         dataSource.add(location: location, tableView: tableView)
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TimeZonePickerDelegate: class {
-    func timeZonePicker(timeZonePicker: TimeZonePicker, didSelectTimeZone timeZone: TimeZone)
+    func timeZonePicker(_ timeZonePicker: TimeZonePicker, didSelect timeZone: TimeZone)
 }
 
 extension TimeZone {
@@ -139,7 +139,7 @@ extension TimeZonePicker: UITableViewDelegate {
         let timeZone = dataSource.filteredTimeZones[indexPath.row]
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.delegate?.timeZonePicker(timeZonePicker: self, didSelectTimeZone: timeZone)
+            self.delegate?.timeZonePicker(self, didSelect: timeZone)
             self.dismiss(animated: true, completion: nil)
         }
     }
