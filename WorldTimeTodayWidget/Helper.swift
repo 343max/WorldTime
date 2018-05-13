@@ -6,6 +6,6 @@ func maximumColumns() -> Int {
     return UIScreen.main.bounds.width > 320 ? 3 : 2
 }
 
-func maximumItems() -> Int {
+func maximumLocationsCompactMode() -> Int {
     return maximumColumns() * 2
 }

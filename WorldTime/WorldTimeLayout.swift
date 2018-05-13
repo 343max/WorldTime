@@ -5,17 +5,24 @@ import UIKit
 class WorldTimeLayout: UICollectionViewLayout {
     var columns = 2
     var rows = 0
+    var minContentHeight: CGFloat?
     var count: Int = 0 {
         didSet {
             columns = min(count, maximumColumns())
             rows = Int(ceil(Float(count) / Float(columns)))
         }
     }
+    
+    var perfectContentHeight: CGFloat {
+        get {
+            return CGFloat(rows) * TimeZoneCollectionViewCell.preferedHeight
+        }
+    }
 
     func prepareLayout(itemCount: Int) {
         self.count = itemCount
     }
-
+    
     override func prepare() {
         super.prepare()
 
@@ -42,7 +49,8 @@ class WorldTimeLayout: UICollectionViewLayout {
             return []
         }
 
-        let itemSize = CGSize(width: collectionView.bounds.width / CGFloat(columns), height: TimeZoneCollectionViewCell.preferedHeight)
+        let itemHeight = minContentHeight != nil ? minContentHeight! / CGFloat(rows) : TimeZoneCollectionViewCell.preferedHeight
+        let itemSize = CGSize(width: collectionView.bounds.width / CGFloat(columns), height: itemHeight)
         let range = 0..<count
         return range.map({ (i) -> UICollectionViewLayoutAttributes in
             let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0) as IndexPath)

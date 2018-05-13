@@ -37,12 +37,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     func setup() {
-        collectionViewSource.locations = Location.fromDefaults()
+        let locations = Location.fromDefaults()
+        collectionViewSource.locations = locations
         collectionView.reloadData()
 
         guard let layout = collectionView.collectionViewLayout as? WorldTimeLayout else {
             fatalError("not a WorldTimeLayout")
         }
+        
+        extensionContext?.widgetLargestAvailableDisplayMode = locations.count <= maximumLocationsCompactMode() ? .compact : .expanded
 
         layout.prepareLayout(itemCount: collectionViewSource.locations.count)
     }
@@ -51,11 +54,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         guard let layout = collectionView.collectionViewLayout as? WorldTimeLayout else {
             fatalError("not a WorldTimeLayout")
         }
-        let perfectHeight = layout.collectionViewContentSize.height
-        if (activeDisplayMode == .compact && perfectHeight > maxSize.height) {
-            extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-        }
-        preferredContentSize = CGSize(width: maxSize.width, height: min(maxSize.height, perfectHeight))
+        
+        layout.minContentHeight = activeDisplayMode == .compact ? maxSize.height : nil
+        preferredContentSize = CGSize(width: 0, height: min(maxSize.height, layout.perfectContentHeight))
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
