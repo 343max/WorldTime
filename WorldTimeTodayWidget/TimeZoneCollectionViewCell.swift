@@ -8,6 +8,22 @@ extension NSAttributedString {
     }
 }
 
+extension Sequence where Iterator.Element == NSAttributedString {
+    func joined(separator: NSAttributedString = NSAttributedString(string: "")) -> NSAttributedString {
+        return self.reduce(NSMutableAttributedString()) { (result, element) -> NSMutableAttributedString in
+            if result.length != 0 {
+                result.append(separator)
+            }
+            result.append(element)
+            return result
+        }
+    }
+    
+    func joined(separator: String) -> NSAttributedString {
+        return self.joined(separator: NSMutableAttributedString(string: separator))
+    }
+}
+
 class TimeZoneCollectionViewCell: UICollectionViewCell {
     static let preferedHeight: CGFloat = 50.0
     static let timeFormatter = DateFormatter.shortTime()
@@ -46,12 +62,6 @@ class TimeZoneCollectionViewCell: UICollectionViewCell {
         timeString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24.0), range: timeString.fullRange())
         locationString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 14.0), range: locationString.fullRange())
         
-        timeLabel.attributedText = [locationString, timeString].reduce(NSMutableAttributedString()) { (concatenatedString, line) -> NSMutableAttributedString in
-            if concatenatedString.length != 0 {
-                concatenatedString.append(NSAttributedString(string: "\n"))
-            }
-            concatenatedString.append(line)
-            return concatenatedString
-        }
+        timeLabel.attributedText = [locationString, timeString].joined(separator: "\n")
     }
 }
