@@ -39,7 +39,13 @@ class TimeZoneDataSource: NSObject, UITableViewDataSource {
     init(locale: Locale, activeTimeZone: TimeZone?) {
         self.locale = locale
         self.activeTimeZone = activeTimeZone
-        timeZones = TimeZone.knownTimeZoneIdentifiers.map() { TimeZone(identifier: $0)! }
+        timeZones = TimeZone.knownTimeZoneIdentifiers.map() { TimeZone(identifier: $0)! }.sorted(by: { (a, b) -> Bool in
+            if (a.secondsFromGMT() != b.secondsFromGMT()) {
+                return a.secondsFromGMT() < b.secondsFromGMT()
+            }
+            
+            return a.identifier < b.identifier
+        })
         filteredTimeZones = timeZones
         super.init()
     }
@@ -48,7 +54,10 @@ class TimeZoneDataSource: NSObject, UITableViewDataSource {
         if needle.isEmpty {
             filteredTimeZones = timeZones
         } else {
-            filteredTimeZones = timeZones.filter { $0.pseudoCleanedName.localizedStandardContains(needle) }
+            filteredTimeZones = timeZones.filter {
+                $0.pseudoCleanedName.localizedStandardContains(needle) ||
+                $0.localizedName(for: .standard, locale: locale)?.localizedStandardContains(needle) ?? false
+            }
         }
     }
 
@@ -64,7 +73,7 @@ class TimeZoneDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: reuseIdentifier)
         let timeZone = filteredTimeZones[indexPath.row]
         cell.textLabel?.text = timeZone.pseudoLocalizedName
-        cell.detailTextLabel?.text = timeZone.localizedName(for: .standard, locale: locale as Locale)
+        cell.detailTextLabel?.text = timeZone.localizedName(for: .standard, locale: locale)
         cell.accessoryType = timeZone == activeTimeZone ? .checkmark : .none
         return cell
     }
