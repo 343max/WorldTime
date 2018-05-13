@@ -1,8 +1,11 @@
 // Copyright 2014-present Max von Webel. All Rights Reserved.
 
-import Foundation
+import UIKit
 
-func with<T>(object: T, block: (_ object: T) -> ()) -> T {
-    block(object)
-    return object
+func maximumColumns() -> Int {
+    return UIScreen.main.bounds.width > 320 ? 3 : 2
+}
+
+func maximumItems() -> Int {
+    return maximumColumns() * 2
 }

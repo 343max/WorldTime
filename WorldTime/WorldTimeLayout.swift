@@ -7,7 +7,7 @@ class WorldTimeLayout: UICollectionViewLayout {
     var rows = 0
     var count: Int = 0 {
         didSet {
-            columns = min(count, 3)
+            columns = min(count, maximumColumns())
             rows = Int(ceil(Float(count) / Float(columns)))
         }
     }
