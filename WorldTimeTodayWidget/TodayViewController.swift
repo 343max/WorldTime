@@ -45,7 +45,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
 
         layout.prepareLayout(itemCount: collectionViewSource.locations.count)
-        self.preferredContentSize = layout.collectionViewContentSize
+    }
+    
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+        guard let layout = collectionView.collectionViewLayout as? WorldTimeLayout else {
+            fatalError("not a WorldTimeLayout")
+        }
+        let perfectHeight = layout.collectionViewContentSize.height
+        if (activeDisplayMode == .compact && perfectHeight > maxSize.height) {
+            extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+        }
+        preferredContentSize = CGSize(width: maxSize.width, height: min(maxSize.height, perfectHeight))
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
