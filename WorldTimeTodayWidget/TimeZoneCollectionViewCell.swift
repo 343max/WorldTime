@@ -25,43 +25,64 @@ extension Sequence where Iterator.Element == NSAttributedString {
 }
 
 class TimeZoneCollectionViewCell: UICollectionViewCell {
-    static let preferedHeight: CGFloat = 50.0
+    static let preferedHeight: CGFloat = 55 // maxiumum widget height: 110px
     static let timeFormatter = DateFormatter.shortTime()
-
-    static func preferredItemSize(collectionViewWidth viewWidth: CGFloat, itemCount: Int) -> CGSize {
-        return CGSize(width: viewWidth / CGFloat(itemCount),
-                      height: TimeZoneCollectionViewCell.preferedHeight)
-    }
+    static let dayOfWeekFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "EEEE", options: 0, locale: Locale.current)
+        return formatter
+    }()
 
     @IBOutlet weak var timeLabel: UILabel!
-
+    
     var location: Location! {
         didSet(oldLocation) {
-            updateTime()
+            update()
+        }
+    }
+    
+    var referenceTimeZone: TimeZone = TimeZone.autoupdatingCurrent {
+        didSet {
+            update()
         }
     }
     
     var timeHidden: Bool = false {
         didSet(oldTimeHidden) {
-            updateTime()
+            update()
+        }
+    }
+    
+    var dayOfWeek: String? {
+        get {
+            let date = Date()
+            let formatter = TimeZoneCollectionViewCell.dayOfWeekFormatter
+            formatter.timeZone = referenceTimeZone
+            let localWeekday = formatter.string(from: date)
+            formatter.timeZone = location.timeZone
+            let weekday = formatter.string(from: date)
+            
+            return weekday == localWeekday ? nil : weekday
         }
     }
 
-    override func awakeFromNib() {
-        self.backgroundColor = UIColor.clear
-        super.awakeFromNib()
-    }
-    
-    func updateTime() {
-        let timeString = NSMutableAttributedString(string: location.stringFrom(date: Date(), formatter: TimeZoneCollectionViewCell.timeFormatter))
-        let locationString = NSMutableAttributedString(string: location.name)
-        
-        if (timeHidden) {
-            timeString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.clear, range: timeString.fullRange())
+    func update() {
+        func attributes(fontSize: CGFloat, hidden: Bool = false, color: UIColor? = nil) -> [NSAttributedStringKey : Any] {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineHeightMultiple = 0.85
+            var attributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: fontSize),
+                                                             NSAttributedStringKey.paragraphStyle: paragraphStyle]
+            if hidden || color != nil {
+                attributes[NSAttributedStringKey.foregroundColor] = color ?? UIColor.clear
+            }
+            return attributes
         }
-        timeString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 24.0), range: timeString.fullRange())
-        locationString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 14.0), range: locationString.fullRange())
         
-        timeLabel.attributedText = [locationString, timeString].joined(separator: "\n")
+        let locationString = [NSAttributedString(string: location.name, attributes: attributes(fontSize: 11.0)),
+                              NSAttributedString(string: relativeHours(seconds: referenceTimeZone.seconds(from: location.timeZone, for: Date())) ?? "", attributes: attributes(fontSize: 11.0, hidden: false, color: UIColor(white: 0.0, alpha: 0.4)))].joined(separator: " ")
+        let timeString = NSAttributedString(string: location.stringFrom(date: Date(), formatter: TimeZoneCollectionViewCell.timeFormatter), attributes: attributes(fontSize: 22.0, hidden: timeHidden))
+        let weekdayString = NSAttributedString(string: dayOfWeek ?? " ", attributes: attributes(fontSize: 11.0, hidden: timeHidden))
+
+        timeLabel.attributedText = [locationString, timeString, weekdayString].joined(separator: "\n")
     }
 }

@@ -3,23 +3,24 @@
 import UIKit
 
 class WorldTimeLayout: UICollectionViewLayout {
-    let cellHeight: CGFloat = 50.0
-    let columns = 2
-
-    var itemCount = 0
+    var columns = 2
     var rows = 0
+    var count: Int = 0 {
+        didSet {
+            columns = min(count, 3)
+            rows = Int(ceil(Float(count) / Float(columns)))
+        }
+    }
 
     func prepareLayout(itemCount: Int) {
-        self.itemCount = itemCount
-        rows = Int(ceil(Float(itemCount) / Float(columns)))
+        self.count = itemCount
     }
 
     override func prepare() {
         super.prepare()
 
         guard let dataSource = self.collectionView?.dataSource, let collectionView = self.collectionView else {
-            rows = 0
-            itemCount = 0
+            count = 0
             return
         }
 
@@ -32,7 +33,7 @@ class WorldTimeLayout: UICollectionViewLayout {
                 return CGSize.zero
             }
             
-            return CGSize(width: collectionView.bounds.width, height: CGFloat(rows) * cellHeight)
+            return CGSize(width: collectionView.bounds.width, height: CGFloat(rows) * TimeZoneCollectionViewCell.preferedHeight)
         }
     }
     
@@ -41,8 +42,8 @@ class WorldTimeLayout: UICollectionViewLayout {
             return []
         }
 
-        let itemSize = CGSize(width: collectionView.bounds.width / CGFloat(columns), height: cellHeight)
-        let range = 0..<itemCount
+        let itemSize = CGSize(width: collectionView.bounds.width / CGFloat(columns), height: TimeZoneCollectionViewCell.preferedHeight)
+        let range = 0..<count
         return range.map({ (i) -> UICollectionViewLayoutAttributes in
             let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0) as IndexPath)
             let column = i % columns

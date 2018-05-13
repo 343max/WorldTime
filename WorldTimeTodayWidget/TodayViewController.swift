@@ -58,12 +58,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.collectionView.frame = self.view.bounds
     }
 
-    func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
-        var marginInsets = defaultMarginInsets
-        marginInsets.bottom = 10.0
-        return marginInsets
-    }
-
     var timeHidden: Bool = false {
         didSet(oldTimeHidden) {
             collectionViewSource.timeHidden = timeHidden
@@ -76,7 +70,7 @@ extension TodayViewController: MinuteChangeNotifierDelegate {
     func minuteDidChange(notifier: MinuteChangeNotifier) {
         for cell in collectionView.visibleCells {
             if let cell = cell as? TimeZoneCollectionViewCell {
-                cell.updateTime()
+                cell.update()
             }
         }
     }
