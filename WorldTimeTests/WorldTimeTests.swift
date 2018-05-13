@@ -1,30 +1,32 @@
 // Copyright 2014-present Max von Webel. All Rights Reserved.
 
-import UIKit
 import XCTest
 
+@testable import WorldTime
+
 class WorldTimeTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testRelativeHoursAuckland() {
+        XCTAssertEqual(relativeHours(seconds: 68400), "+19:00")
+    }
+
+    func testRelativeHoursBerlin() {
+        XCTAssertEqual(relativeHours(seconds: 32400), "+9:00")
+    }
+
+    func testRelativeHoursSanFrancisco() {
+        XCTAssertEqual(relativeHours(seconds: 0), "±0:00")
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testRelativeHoursHonolulu() {
+        XCTAssertEqual(relativeHours(seconds: -10800), "-3:00")
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+
+    func testRelativeHoursColombo() {
+        XCTAssertEqual(relativeHours(seconds: 45000), "+12:30")
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure() {
-            // Put the code you want to measure the time of here.
-        }
+
+    func testRelativeHoursEuclka() {
+        XCTAssertEqual(relativeHours(seconds: 56700), "+15:45")
     }
-    
+
 }

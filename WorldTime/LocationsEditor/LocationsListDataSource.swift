@@ -17,7 +17,9 @@ class LocationsListDataSource: LocationsDataSource, UITableViewDataSource, UITab
     weak var delegate: LocationsListDataSourceDelegate?
 
     func updateTime(cell: UITableViewCell, location: Location) {
-        cell.detailTextLabel?.text = location.stringFrom(date: Date(), formatter: LocationsListDataSource.timeFormatter)
+        cell.detailTextLabel?.text =
+            [   location.timeZone.GMTdiff,
+                location.stringFrom(date: Date(), formatter: LocationsListDataSource.timeFormatter)].joined(separator: " / ")
     }
 
     func add(location: Location, tableView: UITableView) {

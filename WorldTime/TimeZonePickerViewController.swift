@@ -56,7 +56,8 @@ class TimeZoneDataSource: NSObject, UITableViewDataSource {
         } else {
             filteredTimeZones = timeZones.filter {
                 $0.pseudoCleanedName.localizedStandardContains(needle) ||
-                $0.localizedName(for: .standard, locale: locale)?.localizedStandardContains(needle) ?? false
+                $0.localizedName(for: .standard, locale: locale)?.localizedStandardContains(needle) ?? false ||
+                $0.GMTdiff.localizedStandardContains(needle)
             }
         }
     }
@@ -73,7 +74,7 @@ class TimeZoneDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: reuseIdentifier)
         let timeZone = filteredTimeZones[indexPath.row]
         cell.textLabel?.text = timeZone.pseudoLocalizedName
-        cell.detailTextLabel?.text = timeZone.localizedName(for: .standard, locale: locale)
+        cell.detailTextLabel?.text = timeZone.GMTdiff + " " + (timeZone.localizedName(for: .standard, locale: locale) ?? "")
         cell.accessoryType = timeZone == activeTimeZone ? .checkmark : .none
         return cell
     }

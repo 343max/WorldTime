@@ -24,6 +24,8 @@
 		BB51719A1C058900007F6BF9 /* LocationEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB5171991C058900007F6BF9 /* LocationEditorViewController.storyboard */; };
 		BB7B37741C05575C009C3495 /* MinuteChangeNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */; };
 		BB7B37751C056478009C3495 /* MinuteChangeNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */; };
+		BB99372520A78020005617A3 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB99372420A78020005617A3 /* TimeZone.swift */; };
+		BB99372620A7C1DA005617A3 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB99372420A78020005617A3 /* TimeZone.swift */; };
 		BBA4CCD41C0BBCFF00DA2848 /* TimeZonePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4CCD31C0BBCFF00DA2848 /* TimeZonePickerViewController.swift */; };
 		BBB393241BB4D3B300518D0F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393231BB4D3B300518D0F /* Location.swift */; };
 		BBB393251BB4D3CB00518D0F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB393231BB4D3B300518D0F /* Location.swift */; };
@@ -98,6 +100,7 @@
 		BB5171941C057F27007F6BF9 /* LocationEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorViewController.swift; sourceTree = "<group>"; };
 		BB5171991C058900007F6BF9 /* LocationEditorViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LocationEditorViewController.storyboard; sourceTree = "<group>"; };
 		BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MinuteChangeNotifier.swift; path = WorldTime/MinuteChangeNotifier.swift; sourceTree = "<group>"; };
+		BB99372420A78020005617A3 /* TimeZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
 		BBA4CCD31C0BBCFF00DA2848 /* TimeZonePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZonePickerViewController.swift; sourceTree = "<group>"; };
 		BBB393231BB4D3B300518D0F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = WorldTime/Location.swift; sourceTree = "<group>"; };
 		BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationsDataSource.swift; path = WorldTime/LocationsDataSource.swift; sourceTree = "<group>"; };
@@ -245,6 +248,7 @@
 				BBB393261BB4E6A200518D0F /* LocationsDataSource.swift */,
 				BB7B37731C05575C009C3495 /* MinuteChangeNotifier.swift */,
 				BBD173401C0041620025B32F /* NSDateFormatter+ShortTime.swift */,
+				BB99372420A78020005617A3 /* TimeZone.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -416,6 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB99372520A78020005617A3 /* TimeZone.swift in Sources */,
 				BB7B37741C05575C009C3495 /* MinuteChangeNotifier.swift in Sources */,
 				BBD173411C0041620025B32F /* NSDateFormatter+ShortTime.swift in Sources */,
 				BBB393271BB4E6A200518D0F /* LocationsDataSource.swift in Sources */,
@@ -444,6 +449,7 @@
 			files = (
 				BBD1733C1C0039B30025B32F /* WorldTimeLayout.swift in Sources */,
 				BB7B37751C056478009C3495 /* MinuteChangeNotifier.swift in Sources */,
+				BB99372620A7C1DA005617A3 /* TimeZone.swift in Sources */,
 				50006B8C19CF10EA00E0C1B4 /* TimeZoneCollectionViewCell.swift in Sources */,
 				BBD173421C0041D20025B32F /* NSDateFormatter+ShortTime.swift in Sources */,
 				5080795719CEFE6000606C28 /* TodayViewController.swift in Sources */,
@@ -536,7 +542,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_GROUP = 1876110778;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
@@ -588,7 +594,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_GROUP = 1876110778;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -606,7 +612,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WorldTime/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.343max.WorldTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -624,7 +630,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WorldTime/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.343max.WorldTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -683,6 +689,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = WorldTimeTodayWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.343max.WorldTime.TodayWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -699,6 +706,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WorldTimeTodayWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.343max.WorldTime.TodayWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
